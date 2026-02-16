@@ -10,12 +10,15 @@
 
     <!-- Vendors JS -->
 
+    <!-- Utilites JS -->
+    <script src="{{ asset('dashboard/assets/js/buttons.js') }}"></script>
+    <script src="{{ asset('dashboard/assets/js/loading.js') }}"></script>
+
+    
     <!-- Main JS -->
     <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
 
     <!-- Page JS -->
 
     <!-- Place this tag in your head or just before your close body tag. -->
-    <script src="{{ asset('dashboard/assets/js/buttons.js') }}"></script>
-    <script src="{{ asset('dashboard/assets/js/loading.js') }}"></script>
     @yield('js')
