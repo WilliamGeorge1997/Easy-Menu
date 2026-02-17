@@ -27,7 +27,20 @@
 </head>
 
 <body>
-    @yield('content')
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <div class="layout-page">
+
+                {{-- Navbar --}}
+                @include('common::includes.navbar')
+                {{-- Aside --}}
+                @include('common::includes.sidebar')
+                {{-- Content --}}
+                @yield('content')
+
+            </div>
+        </div>
+    </div>
 
     @include('common::includes.js')
 </body>

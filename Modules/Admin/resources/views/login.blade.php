@@ -81,7 +81,13 @@
                                 <label for="email" class="form-label">{{ __('attributes.email') }}</label>
                                 <input type="text" autocomplete="on" class="form-control" id="email" name="email"
                                     placeholder="{{ __('placeholders.email') }}" autofocus value="{{ old('email') }}" />
+                                @error('email')
+                                    <div>
+                                        <p class="text-danger">{{ $message }}</p>
+                                    </div>
+                                @enderror
                             </div>
+
 
 
                             <div class="mb-6 form-password-toggle">
@@ -93,6 +99,11 @@
                                     <span class="input-group-text cursor-pointer"><i
                                             class="icon-base bx bx-hide"></i></span>
                                 </div>
+                                @error('password')
+                                    <div>
+                                        <p class="text-danger">{{ $message }}</p>
+                                    </div>
+                                @enderror
                             </div>
 
 

@@ -17,10 +17,14 @@ class AdminAuthController extends Controller
     public function login(AdminLoginRequest $request)
     {
         $credentials = $request->validated() + ['is_active' => 1];
-
-        if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember_me'))) {
+        $guard = Auth::guard('admin');
+        if ($guard->attempt($credentials, $request->boolean('remember_me'))) {
             $request->session()->regenerate();
-            return to_route('admin.dashboard');
+
+            $admin = $guard->user();
+            $request->session()->put('locale', $admin->lang);
+
+            return redirect()->intended(route('admin.dashboard'));
         }
 
         throw ValidationException::withMessages([

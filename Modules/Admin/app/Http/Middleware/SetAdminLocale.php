@@ -11,10 +11,12 @@ class SetAdminLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::guard('admin')->check()) {
-            $admin = Auth::guard('admin')->user();
-            app()->setLocale($admin->lang);
+        $locale = $request->session()->get('locale');
+        if (!$locale && Auth::guard('admin')->check()) {
+            $locale = Auth::guard('admin')->user()->lang;
+            $request->session()->put('locale', $locale);
         }
+        app()->setLocale($locale ?? config('app.locale'));
 
         return $next($request);
     }
