@@ -19,10 +19,6 @@ class AdminAuthController extends Controller
         $credentials = $request->validated() + ['is_active' => 1];
 
         if (Auth::guard('admin')->attempt($credentials, $request->boolean('remember_me'))) {
-            $admin = Auth::guard('admin')->user();
-            if ($admin->lang) {
-                app()->setLocale($admin->lang);
-            }
             $request->session()->regenerate();
             return to_route('admin.dashboard');
         }
