@@ -1,9 +1,15 @@
 <?php
 
 return [
+    'and' => '&',
+    'home' => 'Home',
     'dashboard' => 'Dashboard',
-    'user_managment' => 'User Management',
+    'users_managment' => 'User Management',
     'admins' => 'Admins',
     'branches' => 'Branches',
     'roles' => 'Roles',
+    'products_managment' => 'Products Managment',
+    'categories' => 'Categories',
+    'products' => 'Products',
+    'addons' => 'Addons',
 ];

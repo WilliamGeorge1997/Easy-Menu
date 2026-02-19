@@ -1,9 +1,15 @@
 <?php
 
 return [
+    'and' => 'و',
+    'home' => 'الرئيسية',
     'dashboard' => 'لوحة التحكم',
-    'user_managment' => 'إدارة المستخدمين',
+    'users_managment' => 'إدارة المستخدمين',
     'admins' => 'المديرين',
     'branches' => 'الفروع',
     'roles' => 'الوظائف',
+    'products_managment' => 'إدارة المنتجات',
+    'categories' => 'الاقسام',
+    'products' => 'المنتجات',
+    'addons' => 'الاضافات',
 ];

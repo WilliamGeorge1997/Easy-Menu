@@ -2,11 +2,14 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Modules\Admin\Services\AdminService;
 
 class AdminController extends Controller
 {
+    public function __construct(private AdminService $adminService) {}
 
     public function dashboard()
     {
@@ -15,9 +18,10 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request): View
     {
-        return view('admin::index');
+        $admins = $this->adminService->findAll($request->all(), ['roles:display']);
+        return view('admin::admins.index', compact('admins'));
     }
 
     /**

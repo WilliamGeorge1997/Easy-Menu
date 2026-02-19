@@ -28,8 +28,12 @@
         "phpunit/phpunit": "^11.5.3"
     },
     "autoload": {
+         "files": [
+            "Modules/Common/Helpers/ResponseHelper.php"
+        ],
         "psr-4": {
             "App\\": "app/",
+              "Modules\\": "Modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
