@@ -1,0 +1,12 @@
+{
+    "name": "Branch",
+    "alias": "branch",
+    "description": "Branch management module for Menu-Hub SaaS",
+    "keywords": [],
+    "priority": 1,
+    "providers": [
+        "Modules\\Branch\\Providers\\BranchServiceProvider"
+    ],
+    "aliases": {},
+    "files": []
+}

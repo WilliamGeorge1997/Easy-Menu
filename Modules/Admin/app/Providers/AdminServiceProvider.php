@@ -3,6 +3,7 @@
 namespace Modules\Admin\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Nwidart\Modules\Traits\PathNamespace;
 use RecursiveDirectoryIterator;
@@ -21,6 +22,7 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Gate::policy(\Modules\Admin\Models\Admin::class, \Modules\Admin\Policies\AdminPolicy::class);
         $this->registerCommands();
         $this->registerCommandSchedules();
         $this->registerTranslations();

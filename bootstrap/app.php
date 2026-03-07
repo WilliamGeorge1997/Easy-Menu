@@ -3,6 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Middleware\HandleCors;
+use Modules\Admin\Http\Middleware\SetAdminLocale;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -12,10 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
-            'admin.locale' => \Modules\Admin\Http\Middleware\SetAdminLocale::class,
+            'admin.locale' => SetAdminLocale::class,
         ]);
         $middleware->redirectGuestsTo('/admin/login');
         $middleware->redirectUsersTo('/admin/dashboard');
+        $middleware->prepend(HandleCors::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use Modules\Branch\Models\Branch;
+use Modules\Category\Models\Category;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('products', function (Blueprint $table) {
+            $table->id();
+            $table->json('title');
+            $table->json('description')->nullable();
+            $table->foreignIdFor(Branch::class)->index()->constrained()->cascadeOnDelete();
+            $table->foreignId(Category::class)->index()->constrained()->cascadeOnDelete();
+            $table->decimal('price', 10, 2)->unsigned()->default(0.00);
+            $table->unsignedInteger('order')->default(1);
+            $table->boolean('is_active')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};

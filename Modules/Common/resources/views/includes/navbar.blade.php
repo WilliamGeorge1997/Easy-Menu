@@ -26,6 +26,33 @@
                       aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
               </li>
 
+              <!-- Language Switcher -->
+              <li class="nav-item dropdown me-2">
+                  <a class="nav-link dropdown-toggle hide-arrow p-0 d-flex align-items-center gap-1" href="javascript:void(0);" data-bs-toggle="dropdown">
+                      <i class="icon-base bx bx-globe icon-md"></i>
+                      <span class="fw-semibold text-uppercase" style="font-size:13px;">{{ app()->getLocale() }}</span>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                      <li>
+                          <form action="{{ route('admin.language.switch', 'en') }}" method="POST">
+                              @csrf
+                              <button type="submit" class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}">
+                                  🇬🇧 English
+                              </button>
+                          </form>
+                      </li>
+                      <li>
+                          <form action="{{ route('admin.language.switch', 'ar') }}" method="POST">
+                              @csrf
+                              <button type="submit" class="dropdown-item {{ app()->getLocale() === 'ar' ? 'active' : '' }}">
+                                  🇸🇦 العربية
+                              </button>
+                          </form>
+                      </li>
+                  </ul>
+              </li>
+              <!-- /Language Switcher -->
+
               <!-- User -->
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"

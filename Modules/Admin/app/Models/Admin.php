@@ -15,8 +15,13 @@ class Admin extends Authenticatable
     /**
      * The attributes that are mass assignable.
      */
-    protected $fillable = ['name', 'email', 'phone', 'password', 'image', 'remember_token', 'is_active', 'lang'];
+    protected $fillable = ['name', 'email', 'phone', 'password', 'image', 'remember_token', 'is_active', 'lang', 'branch_id'];
     protected $hidden = ['password', 'remember_token'];
+
+    public function branch(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\Modules\Branch\Models\Branch::class);
+    }
 
     //Log Activity
     public function getActivitylogOptions(): LogOptions

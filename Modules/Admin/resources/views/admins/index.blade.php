@@ -1,211 +1,115 @@
 @extends('common::layouts.master')
+
+@section('title', __('dashboard/admins.admins'))
+
 @section('content')
-    <!-- Content wrapper -->
-    <div class="content-wrapper">
-        <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- Basic Bootstrap Table -->
-            <div class="card">
-                <h5 class="card-header">{{ __('') }}</h5>
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Project</th>
-                                <th>Client</th>
-                                <th>Users</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td>
-                                    <i class="icon-base bx bxl-angular icon-md text-danger me-4"></i> <span>Angular
-                                        Project</span>
-                                </td>
-                                <td>Albert Cook</td>
-                                <td>
-                                    <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-primary me-1">Active</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="icon-base bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-edit-alt me-1"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-trash me-1"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i class="icon-base bx bxl-react icon-md text-info me-4"></i> <span>React Project</span>
-                                </td>
-                                <td>Barry Hunter</td>
-                                <td>
-                                    <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/3.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-success me-1">Completed</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="icon-base bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i class="icon-base bx bxl-vuejs icon-md text-success me-4"></i> <span>VueJs
-                                        Project</span>
-                                </td>
-                                <td>Trevor Baker</td>
-                                <td>
-                                    <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/3.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/4.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-info me-1">Scheduled</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="icon-base bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <i class="icon-base bx bxl-bootstrap icon-md text-primary me-4"></i>
-                                    <span>Bootstrap Project</span>
-                                </td>
-                                <td>Jerry Milton</td>
-                                <td>
-                                    <ul class="list-unstyled m-0 avatar-group d-flex align-items-center">
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                                            <img src="../assets/img/avatars/2.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
-                                            <img src="../assets/img/avatars/3.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
-                                            class="avatar avatar-xs pull-up" title="Christina Parker">
-                                            <img src="../assets/img/avatars/4.png" alt="Avatar"
-                                                class="rounded-circle" />
-                                        </li>
-                                    </ul>
-                                </td>
-                                <td><span class="badge bg-label-warning me-1">Pending</span></td>
-                                <td>
-                                    <div class="dropdown">
-                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                            data-bs-toggle="dropdown">
-                                            <i class="icon-base bx bx-dots-vertical-rounded"></i>
-                                        </button>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-edit-alt me-2"></i> Edit</a>
-                                            <a class="dropdown-item" href="javascript:void(0);"><i
-                                                    class="icon-base bx bx-trash me-2"></i> Delete</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+<div class="content-wrapper">
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        @if(session('success'))
+            <div class="alert alert-success alert-dismissible mb-4" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
-            <!--/ Basic Bootstrap Table -->
+        @endif
+        @if(session('error'))
+            <div class="alert alert-danger alert-dismissible mb-4" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
+
+        <div class="card">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="mb-0">{{ __('dashboard/admins.admins') }}</h5>
+            </div>
+
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>{{ __('dashboard/admins.name') }}</th>
+                            <th>{{ __('dashboard/admins.role') }}</th>
+                            <th>{{ __('dashboard/admins.branch') }}</th>
+                            <th>{{ __('dashboard/admins.status') }}</th>
+                            <th>{{ __('dashboard/admins.actions') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        @forelse($admins as $admin)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>
+                                    <div class="d-flex align-items-center gap-2">
+                                        <span class="d-flex align-items-center justify-content-center rounded-circle bg-label-primary flex-shrink-0" style="width:45px;height:45px;">
+                                            <i class="bx bx-user fs-4"></i>
+                                        </span>
+                                        <div>
+                                            <span class="fw-semibold d-block">{{ $admin->name }}</span>
+                                            <small class="text-muted">{{ $admin->email }}</small>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    @foreach($admin->roles as $role)
+                                        <span class="badge bg-label-info">{{ $role->display ?? $role->name }}</span>
+                                    @endforeach
+                                </td>
+                                <td>{{ $admin->branch?->getTranslation('title', app()->getLocale()) ?? '-' }}</td>
+                                <td>
+                                    @can('activate', $admin)
+                                        <form action="{{ route('admin.admins.activate', $admin->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            <button type="submit" class="badge border-0 btn-loader {{ $admin->is_active ? 'bg-label-success' : 'bg-label-danger' }}">
+                                                {{ $admin->is_active ? __('dashboard/admins.active') : __('dashboard/admins.inactive') }}
+                                            </button>
+                                        </form>
+                                    @else
+                                        <span class="badge {{ $admin->is_active ? 'bg-label-success' : 'bg-label-danger' }}">
+                                            {{ $admin->is_active ? __('dashboard/admins.active') : __('dashboard/admins.inactive') }}
+                                        </span>
+                                    @endcan
+                                </td>
+                                <td>
+                                    <div class="dropdown">
+                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
+                                            data-bs-toggle="dropdown">
+                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                        </button>
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('admin.admins.edit', $admin->id) }}">
+                                                <i class="bx bx-edit-alt me-1"></i> {{ __('dashboard/admins.edit_admin') }}
+                                            </a>
+                                            <form action="{{ route('admin.admins.destroy', $admin->id) }}" method="POST"
+                                                onsubmit="return confirm('{{ __('dashboard/admins.confirm_delete') }}')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger btn-loader">
+                                                    <i class="bx bx-trash me-1"></i> {{ __('dashboard/admins.delete_admin') }}
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="text-center py-4">{{ __('dashboard/admins.no_admins') }}</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            @if($admins instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                <div class="card-footer">
+                    {{ $admins->links() }}
+                </div>
+            @endif
         </div>
-        <!-- / Content -->
 
-        <!-- Footer -->
-        <footer class="content-footer footer bg-footer-theme">
-            <div class="container-xxl">
-                <div
-                    class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
-                    <div class="mb-2 mb-md-0">
-                        &#169;
-                        Copy rights
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        , made with ❤️ by
-                        <a href="#" target="_blank" class="footer-link">Coudex Solutions</a>
-                    </div>
-                    <div class="d-none d-lg-inline-block">
-                        <a href="" target="_blank" class="footer-link me-4">Coudex Solutions</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- / Footer -->
-
-        <div class="content-backdrop fade"></div>
     </div>
-    <!-- Content wrapper -->
+    <div class="content-backdrop fade"></div>
+</div>
 @endsection

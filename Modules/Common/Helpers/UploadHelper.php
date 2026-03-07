@@ -3,33 +3,40 @@
 
 namespace Modules\Common\Helpers;
 
-use Intervention\Image\Laravel\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 trait UploadHelper
 {
-    public function upload($imageFromRequest, $imageFolder, $resize = false)
+    public function upload($imageFromRequest, $imageFolder, $resize = false, $minimize = false): string
     {
-        if (!file_exists(public_path('uploads/'.$imageFolder))) {
-            mkdir(public_path('uploads/'.$imageFolder), 0777, true);
+        if (!file_exists(public_path('uploads/' . $imageFolder))) {
+            mkdir(public_path('uploads/' . $imageFolder), 0777, true);
         }
 
-        $fileName = time() . $imageFromRequest->getClientOriginalName();
-        $location = public_path('uploads/' . $imageFolder . '/' . $fileName);
+        $extension = strtolower($imageFromRequest->getClientOriginalExtension());
+        $fileName  = time() . '_' . uniqid() . '.' . $extension;
+        $location  = public_path('uploads/' . $imageFolder . '/' . $fileName);
 
-        $image = Image::read($imageFromRequest);
-        if ($resize == true) {
+        $manager = new ImageManager(new Driver());
+        $image   = $manager->read($imageFromRequest->getPathname());
 
-            $image->resize(500, 500);
+        if ($resize) {
+            $image->scaleDown(500, 500);
         }
-        $image->save($location, 50);
 
-        # Optional Resize.
-        // if ($resize == true) {
-        //     $image->resize(100, 70);
-        //     $newlocation = public_path('uploads/' . $imageFolder . '/thumb' . '/' . $fileName);
-        //     $image->save($newlocation, 40);
-        // }
+        if ($minimize) {
+            $image->scaleDown(300, 300);
+        }
 
+        $quality = 50;
+
+        match ($extension) {
+            'png'  => $image->toPng()->save($location),
+            'webp' => $image->toWebp($quality)->save($location),
+            'gif'  => $image->toGif()->save($location),
+            default => $image->toJpeg($quality)->save($location),
+        };
 
         return $fileName;
     }

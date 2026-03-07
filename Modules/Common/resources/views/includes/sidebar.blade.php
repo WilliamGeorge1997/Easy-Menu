@@ -74,7 +74,7 @@
         </li>
 
         {{-- Users --}}
-        <li class="menu-item{{ request()->is('admin/admins*', 'admin/branches*', 'admin/roles*') ? ' active' : '' }}">
+        <li class="menu-item{{ request()->is('admin/admins*', 'admin/branches*', 'admin/roles*') ? ' active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div class="text-truncate" data-i18n="Users Management">{{ __('dashboard/sidebar.users_managment') }}
@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li class="menu-item{{ request()->is('admin/branches*') ? ' active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.branches.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Branches">{{ __('dashboard/sidebar.branches') }}</div>
                     </a>
                 </li>
@@ -109,7 +109,7 @@
 
 
         <!-- Products Managment -->
-        <li class="menu-item{{ request()->is('admin/categories*', 'admin/products*', 'admin/addons*') ? ' active' : '' }}">
+        <li class="menu-item{{ request()->is('admin/categories*', 'admin/products*', 'admin/addons*') ? ' active open' : '' }}">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-package"></i>
                 <div class="text-truncate" data-i18n="Products Managment">
@@ -118,13 +118,13 @@
 
             <ul class="menu-sub">
                 <li class="menu-item{{ request()->is('admin/categories*') ? ' active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.categories.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Categories">{{ __('dashboard/sidebar.categories') }}
                         </div>
                     </a>
                 </li>
                 <li class="menu-item{{ request()->is('admin/products*') ? ' active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.products.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Products">{{ __('dashboard/sidebar.products') }}</div>
                     </a>
                 </li>

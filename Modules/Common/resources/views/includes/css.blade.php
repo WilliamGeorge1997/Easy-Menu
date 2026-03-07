@@ -1,3 +1,6 @@
+<!-- Page Progress Bar — must run as early as possible -->
+<script src="{{ asset('dashboard/assets/js/pageloader.js') }}"></script>
+
 <!-- Icons. Uncomment required icon fonts -->
 <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/fonts/boxicons.css') }}" />
 {{-- <link rel="stylesheet" href="{{ asset('dashboard/assets/vendor/fonts/iconify-icons.css') }}" /> --}}
