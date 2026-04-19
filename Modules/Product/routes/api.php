@@ -6,5 +6,5 @@ use Modules\Product\Http\Controllers\Api\ProductController;
 Route::prefix('v1')->group(function () {
 
     Route::get('products/categories-by-branch/{branchId}', [ProductController::class, 'index']);
-
+    Route::get('products/{product}', [ProductController::class, 'show']);
 });
