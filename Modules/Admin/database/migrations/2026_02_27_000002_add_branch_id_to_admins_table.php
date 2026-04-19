@@ -10,10 +10,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('admins', function (Blueprint $table) {
-            $table->foreignIdFor(Branch::class)->nullable()->index()->constrained()->cascadeOnDelete()->after('lang');
+            $table->foreignIdFor(Branch::class)->after('lang')->nullable()->index()->constrained()->cascadeOnDelete();
         });
     }
-    
+
 
     public function down(): void
     {

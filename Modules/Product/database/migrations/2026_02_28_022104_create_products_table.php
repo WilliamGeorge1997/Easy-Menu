@@ -18,7 +18,7 @@ return new class extends Migration
             $table->json('title');
             $table->json('description')->nullable();
             $table->foreignIdFor(Branch::class)->index()->constrained()->cascadeOnDelete();
-            $table->foreignId(Category::class)->index()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Category::class)->index()->constrained()->cascadeOnDelete();
             $table->decimal('price', 10, 2)->unsigned()->default(0.00);
             $table->unsignedInteger('order')->default(1);
             $table->boolean('is_active')->default(true);
