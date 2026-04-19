@@ -31,6 +31,7 @@ class BranchController extends Controller
             $branch = Branch::active()->where('slug', $slug)->firstOrFail();
 
             $categories = $branch->categories()
+                ->with('products.images')
                 ->active()
                 ->orderBy('order')
                 ->get();
