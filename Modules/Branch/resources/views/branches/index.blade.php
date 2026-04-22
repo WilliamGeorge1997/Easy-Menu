@@ -90,6 +90,12 @@
                                                 <a class="dropdown-item" href="{{ route('admin.branches.edit', $branch->id) }}">
                                                     <i class="bx bx-edit-alt me-1"></i> {{ __('dashboard/branches.edit_branch') }}
                                                 </a>
+                                                <a class="dropdown-item" href="{{ route('admin.branches.work-hours.edit', $branch->id) }}">
+                                                    <i class="bx bx-time-five me-1"></i> {{ __('dashboard/branches.working_hours') }}
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('admin.branches.settings.edit', $branch->id) }}">
+                                                    <i class="bx bx-cog me-1"></i> {{ __('dashboard/branches.branch_settings') }}
+                                                </a>
                                             @endcan
                                             @can('delete', $branch)
                                                 <form action="{{ route('admin.branches.destroy', $branch->id) }}" method="POST"

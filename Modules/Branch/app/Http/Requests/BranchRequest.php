@@ -55,7 +55,7 @@ class BranchRequest extends FormRequest
             // Branch Manager admin account
             'admin_name'     => 'required|string|max:191',
             'admin_email'    => 'required|email|unique:admins,email|max:191',
-            'admin_phone'    => 'nullable|string|max:20',
+            'admin_phone'    => 'nullable|unique:admins,phone|string|max:20',
             'admin_password' => 'required|string|min:8|confirmed',
         ];
     }
@@ -67,6 +67,8 @@ class BranchRequest extends FormRequest
             'title_ar.required' => __('validation.required', ['attribute' => __('attributes.title') . ' (AR)']),
             'slug.required'     => __('validation.required', ['attribute' => 'Slug']),
             'slug.unique'       => __('validation.unique', ['attribute' => 'Slug']),
+            'admin_email.unique' => __('validation.unique', ['attribute' => 'Email']),
+            'admin_phone.unique' => __('validation.unique', ['attribute' => 'Phone']),
         ];
     }
 }

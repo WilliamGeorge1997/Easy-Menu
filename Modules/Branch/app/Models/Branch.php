@@ -5,6 +5,10 @@ namespace Modules\Branch\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Modules\Admin\Models\Admin;
+use Modules\Branch\Models\WorkHour;
+use Modules\Category\Models\Category;
 use Spatie\Translatable\HasTranslations;
 
 class Branch extends Model
@@ -48,13 +52,23 @@ class Branch extends Model
         return $value;
     }
 
-    public function admins(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function admins(): HasMany
     {
-        return $this->hasMany(\Modules\Admin\Models\Admin::class);
+        return $this->hasMany(Admin::class);
     }
 
-    public function categories(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function categories(): HasMany
     {
-        return $this->hasMany(\Modules\Category\Models\Category::class);
+        return $this->hasMany(Category::class);
+    }
+
+    public function workHours(): HasMany
+    {
+        return $this->hasMany(WorkHour::class);
+    }
+
+    public function settings(): HasMany
+    {
+        return $this->hasMany(BranchSetting::class);
     }
 }
