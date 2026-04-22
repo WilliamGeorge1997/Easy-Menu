@@ -14,7 +14,7 @@ class BranchController extends Controller
     public function show(string $slug)
     {
         try {
-            $branch = Branch::active()->where('slug', $slug)->firstOrFail();
+            $branch = Branch::active()->with('workHours', 'settings')->where('slug', $slug)->firstOrFail();
             return returnMessage(true, 'Branch Details', $branch);
         } catch (\Exception $e) {
             return returnMessage(false, $e->getMessage(), null, 'not_found');
