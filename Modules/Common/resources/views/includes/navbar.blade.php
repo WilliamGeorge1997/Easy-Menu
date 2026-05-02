@@ -17,7 +17,7 @@
                           <form action="{{ route('admin.language.switch', 'en') }}" method="POST">
                               @csrf
                               <button type="submit" class="dropdown-item {{ app()->getLocale() === 'en' ? 'active' : '' }}">
-                                  🇬🇧 English
+                                  🇬🇧 {{ __('dashboard/common.language_en') }}
                               </button>
                           </form>
                       </li>
@@ -25,7 +25,7 @@
                           <form action="{{ route('admin.language.switch', 'ar') }}" method="POST">
                               @csrf
                               <button type="submit" class="dropdown-item {{ app()->getLocale() === 'ar' ? 'active' : '' }}">
-                                  🇸🇦 العربية
+                                  🇸🇦 {{ __('dashboard/common.language_ar') }}
                               </button>
                           </form>
                       </li>
@@ -63,8 +63,8 @@
                                       </div>
                                   </div>
                                   <div class="flex-grow-1">
-                                      <h6 class="mb-0">{{ $admin?->name ?? 'Admin' }}</h6>
-                                      <small class="text-body-secondary">{{ $adminRole?->display ?? $adminRole?->name ?? 'Admin' }}</small>
+                                      <h6 class="mb-0">{{ $admin?->name ?? __('dashboard/common.admin') }}</h6>
+                                      <small class="text-body-secondary">{{ $adminRole?->display ?? $adminRole?->name ?? __('dashboard/common.admin') }}</small>
                                   </div>
                               </div>
                          </div>
@@ -84,7 +84,7 @@
                          <form action="{{ route('admin.logout') }}" method="POST">
                              @csrf
                              <button type="submit" class="dropdown-item border-0 bg-transparent w-100 text-start">
-                                 <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
+                                 <i class="icon-base bx bx-power-off icon-md me-3"></i><span>{{ __('dashboard/common.log_out') }}</span>
                              </button>
                          </form>
                       </li>

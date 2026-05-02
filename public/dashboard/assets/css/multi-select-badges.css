@@ -1,0 +1,156 @@
+.msb {
+  position: relative;
+  width: 100%;
+}
+
+/* Hide native select but keep it in the form for submission/validation */
+select[multiple].msb-native {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.msb-control {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .375rem;
+  width: 100%;
+  min-height: calc(1.5em + .875rem + 2px); /* close to bootstrap inputs */
+  padding: .4375rem .75rem;
+  background-color: var(--bs-body-bg, #fff);
+  border: 1px solid var(--bs-border-color, #d9dee3);
+  border-radius: .375rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* When used inside input-group, mimic attached control */
+.input-group > .msb .msb-control {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+[dir="rtl"] .input-group > .msb .msb-control {
+  border-top-left-radius: .375rem;
+  border-bottom-left-radius: .375rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.msb-control:focus,
+.msb-control.msb-open {
+  border-color: rgba(105, 108, 255, .65);
+  box-shadow: 0 0 0 .2rem rgba(105, 108, 255, .15);
+}
+
+.msb-placeholder {
+  color: var(--bs-secondary-color, #6c757d);
+  font-size: .875rem;
+}
+
+.msb-badges {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .375rem;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.msb-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .25rem .5rem;
+  border-radius: 999px;
+  background: rgba(105, 108, 255, .12);
+  color: #696cff;
+  font-size: .8125rem;
+  line-height: 1;
+  max-width: 100%;
+}
+.msb-badge-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 16rem;
+}
+.msb-badge-remove {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1rem;
+  height: 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.msb-badge-remove:hover {
+  background: rgba(105, 108, 255, .18);
+}
+
+.msb-caret {
+  flex: 0 0 auto;
+  width: 0;
+  height: 0;
+  margin-inline-start: auto;
+  border-left: .35rem solid transparent;
+  border-right: .35rem solid transparent;
+  border-top: .45rem solid var(--bs-secondary-color, #6c757d);
+  opacity: .85;
+}
+
+.msb-dropdown {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  top: calc(100% + .25rem);
+  z-index: 1080; /* above cards */
+  background: var(--bs-body-bg, #fff);
+  border: 1px solid var(--bs-border-color, #d9dee3);
+  border-radius: .5rem;
+  box-shadow: 0 .5rem 1.25rem rgba(0,0,0,.12);
+  overflow: hidden;
+  display: none;
+  max-height: 260px;
+}
+
+.msb.msb-open .msb-dropdown {
+  display: block;
+}
+
+.msb-option {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .55rem .75rem;
+  cursor: pointer;
+  font-size: .875rem;
+}
+.msb-option:hover {
+  background: rgba(105, 108, 255, .06);
+}
+.msb-option input[type="checkbox"] {
+  pointer-events: none;
+}
+.msb-option.msb-option-selected .msb-option-label {
+  font-weight: 600;
+}
+
+.msb-disabled .msb-control {
+  background: var(--bs-secondary-bg, #f5f5f9);
+  cursor: not-allowed;
+  opacity: .8;
+}
+.msb-disabled .msb-badge-remove {
+  display: none;
+}

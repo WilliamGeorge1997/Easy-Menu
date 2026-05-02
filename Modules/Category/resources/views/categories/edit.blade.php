@@ -187,7 +187,7 @@
                                         </span>
                                     </div>
                                     <p class="fw-semibold mb-1" style="font-size:.95rem;">{{ __('dashboard/categories.image') }}</p>
-                                    <p class="text-muted mb-3" style="font-size:.8rem;">Click to browse or drag and drop</p>
+                                    <p class="text-muted mb-3" style="font-size:.8rem;">{{ __('dashboard/categories.image_upload_hint') }}</p>
                                     <span class="badge bg-label-secondary px-3 py-2" style="font-size:.75rem;">JPG • JPEG • PNG • WEBP</span>
                                 </div>
                                 <div id="image-preview-wrap" @if($category->getRawOriginal('image')) style="display:block;width:100%;" @else style="display:none;width:100%;" @endif>
@@ -198,7 +198,7 @@
                             <button type="button" id="remove-image"
                                 class="btn btn-sm btn-danger mt-2 w-100 d-flex align-items-center justify-content-center gap-1"
                                 @if(!$category->getRawOriginal('image')) disabled @endif>
-                                <i class="bx bx-trash"></i> Remove image
+                                <i class="bx bx-trash"></i> {{ __('dashboard/categories.remove_image') }}
                             </button>
 
                             @error('image')

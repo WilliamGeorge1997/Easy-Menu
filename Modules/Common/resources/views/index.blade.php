@@ -1,5 +1,5 @@
 <x-common::layouts.master>
-    <h1>Hello World</h1>
+    <h1>{{ __('dashboard/common.hello_world') }}</h1>
 
-    <p>Module: {!! config('common.name') !!}</p>
+    <p>{{ __('dashboard/common.module') }}: {!! config('common.name') !!}</p>
 </x-common::layouts.master>

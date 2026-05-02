@@ -19,6 +19,8 @@ return [
     'category'             => 'التصنيف',
     'images'               => 'الصور',
     'current_images'       => 'الصور الحالية',
+    'images_upload_hint'   => 'انقر للاختيار أو اسحب وأفلت',
+    'remove_images'        => 'إزالة الصور',
     'created_successfully' => 'تم إنشاء المنتج بنجاح.',
     'updated_successfully' => 'تم تحديث المنتج بنجاح.',
     'deleted_successfully' => 'تم حذف المنتج بنجاح.',
@@ -33,4 +35,5 @@ return [
     'confirm_delete_image' => 'هل أنت متأكد من حذف هذه الصورة؟',
     'first'                => 'أولاً',
     'image_delete_failed'  => 'فشل حذف الصورة. يرجى المحاولة مرة أخرى.',
+    'branch_required_for_super_admin' => 'الفرع مطلوب للمشرف العام.',
 ];

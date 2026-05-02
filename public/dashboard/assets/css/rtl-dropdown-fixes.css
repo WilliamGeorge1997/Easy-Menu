@@ -1,0 +1,44 @@
+/* Global RTL fixes for dropdown/select arrows (Bootstrap + theme). */
+
+/* Native select arrow (Bootstrap .form-select uses a background-image arrow). */
+[dir="rtl"] .form-select {
+  padding: 0.543rem 0.9375rem 0.543rem 2.625rem;
+  background-position: left 0.9375rem center;
+}
+
+[dir="rtl"] .form-select:focus,
+[dir="rtl"] .form-select:focus-within {
+  background-position: left calc(0.9375rem - 1px) center;
+}
+
+/* Input-group variants in the theme pin the arrow to the right; flip to left. */
+[dir="rtl"] .input-group .form-select,
+[dir="rtl"] .input-group .form-select:focus,
+[dir="rtl"] .input-group .form-select:focus-within {
+  background-position: left 0.9375rem center;
+}
+[dir="rtl"] .input-group.input-group-sm .form-select,
+[dir="rtl"] .input-group.input-group-sm .form-select:focus,
+[dir="rtl"] .input-group.input-group-sm .form-select:focus-within {
+  background-position: left 0.8125rem center;
+}
+[dir="rtl"] .input-group.input-group-lg .form-select,
+[dir="rtl"] .input-group.input-group-lg .form-select:focus,
+[dir="rtl"] .input-group.input-group-lg .form-select:focus-within {
+  background-position: left 1.3125rem center;
+}
+
+/* Multi/select-size inputs remove the arrow; keep padding sane in RTL. */
+[dir="rtl"] .form-select[multiple],
+[dir="rtl"] .form-select[size]:not([size="1"]) {
+  padding-left: 0.9375rem;
+  padding-right: 0.9375rem;
+}
+
+/* Dropdown buttons caret spacing (avoid caret sitting on text in RTL). */
+[dir="rtl"] .dropdown-toggle::after {
+  margin-left: 0;
+  margin-right: 0.5em;
+  margin-inline: 0 0.8em;
+}
+

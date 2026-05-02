@@ -1,5 +1,5 @@
 <x-admin::layouts.master>
-    <h1>Hello World</h1>
+    <h1>{{ __('dashboard/common.hello_world') }}</h1>
 
-    <p>Module: {!! config('admin.name') !!}</p>
+    <p>{{ __('dashboard/common.module') }}: {!! config('admin.name') !!}</p>
 </x-admin::layouts.master>

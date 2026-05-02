@@ -74,14 +74,14 @@ class ProductRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title_en.required' => 'The English title is required.',
-            'title_ar.required' => 'The Arabic title is required.',
-            'price.required' => 'The price is required.',
-            'price.numeric' => 'The price must be a number.',
-            'category_id.required' => 'The category is required.',
-            'category_id.exists' => 'The selected category does not exist.',
-            'branch_id.required' => 'Branch is required for Super Admin.',
-            'branch_id.exists' => 'The selected branch does not exist.',
+            'title_en.required' => __('validation.required', ['attribute' => __('dashboard/products.title_en')]),
+            'title_ar.required' => __('validation.required', ['attribute' => __('dashboard/products.title_ar')]),
+            'price.required' => __('validation.required', ['attribute' => __('dashboard/products.price')]),
+            'price.numeric' => __('validation.numeric', ['attribute' => __('dashboard/products.price')]),
+            'category_id.required' => __('validation.required', ['attribute' => __('dashboard/products.category')]),
+            'category_id.exists' => __('validation.exists', ['attribute' => __('dashboard/products.category')]),
+            'branch_id.required' => __('dashboard/products.branch_required_for_super_admin'),
+            'branch_id.exists' => __('validation.exists', ['attribute' => __('dashboard/products.branch')]),
         ];
     }
 }

@@ -67,7 +67,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-medium">{{ __('dashboard/addons.title_en') }} <span class="text-danger">*</span></label>
-                                    <div class="input-group @error('title_en') has-validation @enderror">
+                                    <div class="input-group @error('title_en') has-validation @enderror" dir="ltr">
                                         <span class="input-group-text"><i class="bx bx-text"></i></span>
                                         <input type="text" name="title_en" class="form-control @error('title_en') is-invalid @enderror" value="{{ old('title_en') }}">
                                         @error('title_en')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -75,9 +75,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-medium">{{ __('dashboard/addons.title_ar') }} <span class="text-danger">*</span></label>
-                                    <div class="input-group @error('title_ar') has-validation @enderror">
+                                    <div class="input-group @error('title_ar') has-validation @enderror" dir="rtl">
                                         <span class="input-group-text"><i class="bx bx-text"></i></span>
-                                        <input type="text" name="title_ar" class="form-control @error('title_ar') is-invalid @enderror" value="{{ old('title_ar') }}">
+                                        <input type="text" name="title_ar" class="form-control @error('title_ar') is-invalid @enderror" value="{{ old('title_ar') }}" dir="rtl">
                                         @error('title_ar')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
                                 </div>
@@ -161,11 +161,13 @@
         function rowTemplate(i) {
             return `
                 <div class="row g-2 border rounded p-3 mb-2">
-                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" placeholder="{{ __('dashboard/addons.value_title_en') }}" required></div>
-                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required></div>
-                    <div class="col-md-3"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" placeholder="{{ __('dashboard/addons.price') }}" required></div>
-                    <div class="col-md-4"><input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp"></div>
-                    <div class="col-md-2 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
+                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" placeholder="{{ __('dashboard/addons.value_title_en') }}" required dir="ltr"></div>
+                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required dir="rtl"></div>
+                    <div class="col-md-2"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" placeholder="{{ __('dashboard/addons.price') }}" required dir="ltr"></div>
+                    <div class="col-md-3"><input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp"></div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-row" title="{{ __('dashboard/common.remove') }}" aria-label="{{ __('dashboard/common.remove') }}">×</button>
+                    </div>
                 </div>`;
         }
 

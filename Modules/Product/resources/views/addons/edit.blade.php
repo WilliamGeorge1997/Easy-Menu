@@ -68,7 +68,7 @@
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <label class="form-label fw-medium">{{ __('dashboard/addons.title_en') }} <span class="text-danger">*</span></label>
-                                    <div class="input-group @error('title_en') has-validation @enderror">
+                                    <div class="input-group @error('title_en') has-validation @enderror" dir="ltr">
                                         <span class="input-group-text"><i class="bx bx-text"></i></span>
                                         <input type="text" name="title_en" class="form-control @error('title_en') is-invalid @enderror" value="{{ old('title_en', $addon->getTranslation('title', 'en')) }}">
                                         @error('title_en')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -76,9 +76,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-medium">{{ __('dashboard/addons.title_ar') }} <span class="text-danger">*</span></label>
-                                    <div class="input-group @error('title_ar') has-validation @enderror">
+                                    <div class="input-group @error('title_ar') has-validation @enderror" dir="rtl">
                                         <span class="input-group-text"><i class="bx bx-text"></i></span>
-                                        <input type="text" name="title_ar" class="form-control @error('title_ar') is-invalid @enderror" value="{{ old('title_ar', $addon->getTranslation('title', 'ar')) }}">
+                                        <input type="text" name="title_ar" class="form-control @error('title_ar') is-invalid @enderror" value="{{ old('title_ar', $addon->getTranslation('title', 'ar')) }}" dir="rtl">
                                         @error('title_ar')<div class="invalid-feedback">{{ $message }}</div>@enderror
                                     </div>
                                 </div>
@@ -174,20 +174,22 @@
             var safeExistingImage = value.image || '';
             return `
                 <div class="row g-2 border rounded p-3 mb-2">
-                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" value="${value.title_en || ''}" placeholder="{{ __('dashboard/addons.value_title_en') }}" required></div>
-                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" value="${value.title_ar || ''}" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required></div>
-                    <div class="col-md-3"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" value="${value.price || 0}" placeholder="{{ __('dashboard/addons.price') }}" required></div>
-                    <div class="col-md-4">
+                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" value="${value.title_en || ''}" placeholder="{{ __('dashboard/addons.value_title_en') }}" required dir="ltr"></div>
+                    <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" value="${value.title_ar || ''}" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required dir="rtl"></div>
+                    <div class="col-md-2"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" value="${value.price || 0}" placeholder="{{ __('dashboard/addons.price') }}" required dir="ltr"></div>
+                    <div class="col-md-3">
                         <input type="hidden" name="values[${i}][existing_image]" value="${safeExistingImage}">
                         <input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp">
                     </div>
-                    <div class="col-md-2 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
+                    <div class="col-md-1 d-flex align-items-center justify-content-end">
+                        <button type="button" class="btn btn-sm btn-danger remove-row" title="{{ __('dashboard/common.remove') }}" aria-label="{{ __('dashboard/common.remove') }}">×</button>
+                    </div>
                     <div class="col-12">
                         <div class="d-flex align-items-center gap-2 mt-1 addon-value-image-preview">
                             <small class="text-muted">{{ __('dashboard/products.current_images') }}:</small>
                             ${value.image
                                 ? `<img src="${value.image}" alt="value image" class="rounded border" style="width:56px;height:56px;object-fit:cover;">`
-                                : `<span class="text-muted small">No image</span>`
+                                : `<span class="text-muted small">{{ __('dashboard/common.no_image') }}</span>`
                             }
                         </div>
                     </div>
@@ -220,7 +222,7 @@
             if (!e.target.files || !e.target.files[0]) {
                 preview.innerHTML = `
                     <small class="text-muted">{{ __('dashboard/products.current_images') }}:</small>
-                    <span class="text-muted small">No image</span>
+                    <span class="text-muted small">{{ __('dashboard/common.no_image') }}</span>
                 `;
                 return;
             }

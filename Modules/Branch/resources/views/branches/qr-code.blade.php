@@ -41,10 +41,10 @@
                                 <div class="col-md-3">
                                     <label class="form-label" for="download-ext">{{ __('dashboard/branches.file_type') }}</label>
                                     <select id="download-ext" class="form-select">
-                                        <option value="png">PNG</option>
-                                        <option value="jpeg">JPEG</option>
-                                        <option value="webp">WEBP</option>
-                                        <option value="svg">SVG</option>
+                                        <option value="png">{{ __('dashboard/branches.file_type_png') }}</option>
+                                        <option value="jpeg">{{ __('dashboard/branches.file_type_jpeg') }}</option>
+                                        <option value="webp">{{ __('dashboard/branches.file_type_webp') }}</option>
+                                        <option value="svg">{{ __('dashboard/branches.file_type_svg') }}</option>
                                     </select>
                                 </div>
                                 <div class="col-md-3 d-flex align-items-end">
@@ -89,8 +89,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="qr-shape">{{ __('dashboard/branches.qr_shape') }}</label>
                                                     <select id="qr-shape" class="form-select">
-                                                        <option value="square">Square</option>
-                                                        <option value="dots">Dots</option>
+                                                        <option value="square">{{ __('dashboard/branches.qr_shape_square') }}</option>
+                                                        <option value="dots">{{ __('dashboard/branches.qr_shape_dots') }}</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -114,12 +114,12 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="dots-type">{{ __('dashboard/branches.dots_type') }}</label>
                                                     <select id="dots-type" class="form-select">
-                                                        <option value="square">Square</option>
-                                                        <option value="rounded">Rounded</option>
-                                                        <option value="dots">Dots</option>
-                                                        <option value="classy">Classy</option>
-                                                        <option value="classy-rounded">Classy Rounded</option>
-                                                        <option value="extra-rounded">Extra Rounded</option>
+                                                        <option value="square">{{ __('dashboard/branches.dots_type_square') }}</option>
+                                                        <option value="rounded">{{ __('dashboard/branches.dots_type_rounded') }}</option>
+                                                        <option value="dots">{{ __('dashboard/branches.dots_type_dots') }}</option>
+                                                        <option value="classy">{{ __('dashboard/branches.dots_type_classy') }}</option>
+                                                        <option value="classy-rounded">{{ __('dashboard/branches.dots_type_classy_rounded') }}</option>
+                                                        <option value="extra-rounded">{{ __('dashboard/branches.dots_type_extra_rounded') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-12">
@@ -139,8 +139,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="dots-gradient-type">{{ __('dashboard/branches.gradient_type') }}</label>
                                                     <select id="dots-gradient-type" class="form-select">
-                                                        <option value="linear">Linear</option>
-                                                        <option value="radial">Radial</option>
+                                                        <option value="linear">{{ __('dashboard/branches.gradient_type_linear') }}</option>
+                                                        <option value="radial">{{ __('dashboard/branches.gradient_type_radial') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6">
@@ -155,9 +155,9 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="corner-square-type">{{ __('dashboard/branches.corner_square_type') }}</label>
                                                     <select id="corner-square-type" class="form-select">
-                                                        <option value="square">Square</option>
-                                                        <option value="dot">Dot</option>
-                                                        <option value="extra-rounded">Extra Rounded</option>
+                                                        <option value="square">{{ __('dashboard/branches.corner_square_type_square') }}</option>
+                                                        <option value="dot">{{ __('dashboard/branches.corner_square_type_dot') }}</option>
+                                                        <option value="extra-rounded">{{ __('dashboard/branches.corner_square_type_extra_rounded') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-12">
@@ -177,8 +177,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="corner-square-gradient-type">{{ __('dashboard/branches.gradient_type') }}</label>
                                                     <select id="corner-square-gradient-type" class="form-select">
-                                                        <option value="linear">Linear</option>
-                                                        <option value="radial">Radial</option>
+                                                        <option value="linear">{{ __('dashboard/branches.gradient_type_linear') }}</option>
+                                                        <option value="radial">{{ __('dashboard/branches.gradient_type_radial') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6">
@@ -193,8 +193,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="corner-dot-type">{{ __('dashboard/branches.corner_dot_type') }}</label>
                                                     <select id="corner-dot-type" class="form-select">
-                                                        <option value="square">Square</option>
-                                                        <option value="dot">Dot</option>
+                                                        <option value="square">{{ __('dashboard/branches.corner_dot_type_square') }}</option>
+                                                        <option value="dot">{{ __('dashboard/branches.corner_dot_type_dot') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-12">
@@ -214,8 +214,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="corner-dot-gradient-type">{{ __('dashboard/branches.gradient_type') }}</label>
                                                     <select id="corner-dot-gradient-type" class="form-select">
-                                                        <option value="linear">Linear</option>
-                                                        <option value="radial">Radial</option>
+                                                        <option value="linear">{{ __('dashboard/branches.gradient_type_linear') }}</option>
+                                                        <option value="radial">{{ __('dashboard/branches.gradient_type_radial') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6">
@@ -257,8 +257,8 @@
                                                 <div class="col-6">
                                                     <label class="form-label" for="background-gradient-type">{{ __('dashboard/branches.gradient_type') }}</label>
                                                     <select id="background-gradient-type" class="form-select">
-                                                        <option value="linear">Linear</option>
-                                                        <option value="radial">Radial</option>
+                                                        <option value="linear">{{ __('dashboard/branches.gradient_type_linear') }}</option>
+                                                        <option value="radial">{{ __('dashboard/branches.gradient_type_radial') }}</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-6">

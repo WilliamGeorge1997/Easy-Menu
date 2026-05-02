@@ -47,4 +47,5 @@ return [
     'value_title_en_required' => 'Each addon value must have an English title.',
     'value_title_ar_required' => 'Each addon value must have an Arabic title.',
     'value_price_required' => 'Each addon value must have a price.',
+    'multiple_selection_allowed' => 'Multiple selection allowed.',
 ];

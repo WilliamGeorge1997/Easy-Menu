@@ -12,6 +12,8 @@ return [
     'description_ar'       => 'الوصف (عربي)',
     'image'                => 'الصورة',
     'current_image'        => 'الصورة الحالية',
+    'image_upload_hint'    => 'انقر للاختيار أو اسحب وأفلت',
+    'remove_image'         => 'إزالة الصورة',
     'order'                => 'الترتيب',
     'is_active'            => 'مفعّل',
     'status'               => 'الحالة',
@@ -27,4 +29,5 @@ return [
     'save'                 => 'حفظ',
     'cancel'               => 'إلغاء',
     'confirm_delete'       => 'هل أنت متأكد من حذف هذا التصنيف؟',
+    'branch_required_for_super_admin' => 'الفرع مطلوب للمشرف العام.',
 ];

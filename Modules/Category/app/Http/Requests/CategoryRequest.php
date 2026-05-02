@@ -73,10 +73,10 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title_en.required'  => 'The English title is required.',
-            'title_ar.required'  => 'The Arabic title is required.',
-            'branch_id.required' => 'Branch is required for Super Admin.',
-            'branch_id.exists'   => 'The selected branch does not exist.',
+            'title_en.required' => __('validation.required', ['attribute' => __('dashboard/categories.title_en')]),
+            'title_ar.required' => __('validation.required', ['attribute' => __('dashboard/categories.title_ar')]),
+            'branch_id.required' => __('dashboard/categories.branch_required_for_super_admin'),
+            'branch_id.exists' => __('validation.exists', ['attribute' => __('dashboard/categories.branch')]),
         ];
     }
 }

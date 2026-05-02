@@ -61,8 +61,8 @@
                         <div class="col-md-6">
                             <label class="form-label" for="lang">{{ __('dashboard/branches.default_language') }}</label>
                             <select id="lang" name="lang" class="form-select @error('lang') is-invalid @enderror">
-                                <option value="en" {{ old('lang', $setting->lang ?? 'en') === 'en' ? 'selected' : '' }}>English</option>
-                                <option value="ar" {{ old('lang', $setting->lang ?? 'en') === 'ar' ? 'selected' : '' }}>العربية</option>
+                                <option value="en" {{ old('lang', $setting->lang ?? 'en') === 'en' ? 'selected' : '' }}>{{ __('dashboard/common.language_en') }}</option>
+                                <option value="ar" {{ old('lang', $setting->lang ?? 'en') === 'ar' ? 'selected' : '' }}>{{ __('dashboard/common.language_ar') }}</option>
                             </select>
                             @error('lang')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
@@ -127,42 +127,42 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="facebook">Facebook</label>
+                            <label class="form-label" for="facebook">{{ __('dashboard/branches.facebook') }}</label>
                             <input type="url" id="facebook" name="facebook" class="form-control @error('facebook') is-invalid @enderror"
                                 value="{{ old('facebook', $setting->facebook) }}">
                             @error('facebook')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="youtube">YouTube</label>
+                            <label class="form-label" for="youtube">{{ __('dashboard/branches.youtube') }}</label>
                             <input type="url" id="youtube" name="youtube" class="form-control @error('youtube') is-invalid @enderror"
                                 value="{{ old('youtube', $setting->youtube) }}">
                             @error('youtube')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="instagram">Instagram</label>
+                            <label class="form-label" for="instagram">{{ __('dashboard/branches.instagram') }}</label>
                             <input type="url" id="instagram" name="instagram" class="form-control @error('instagram') is-invalid @enderror"
                                 value="{{ old('instagram', $setting->instagram) }}">
                             @error('instagram')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="x">X</label>
+                            <label class="form-label" for="x">{{ __('dashboard/branches.x') }}</label>
                             <input type="url" id="x" name="x" class="form-control @error('x') is-invalid @enderror"
                                 value="{{ old('x', $setting->x) }}">
                             @error('x')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="snapchat">Snapchat</label>
+                            <label class="form-label" for="snapchat">{{ __('dashboard/branches.snapchat') }}</label>
                             <input type="url" id="snapchat" name="snapchat" class="form-control @error('snapchat') is-invalid @enderror"
                                 value="{{ old('snapchat', $setting->snapchat) }}">
                             @error('snapchat')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
 
                         <div class="col-md-4">
-                            <label class="form-label" for="tiktok">TikTok</label>
+                            <label class="form-label" for="tiktok">{{ __('dashboard/branches.tiktok') }}</label>
                             <input type="url" id="tiktok" name="tiktok" class="form-control @error('tiktok') is-invalid @enderror"
                                 value="{{ old('tiktok', $setting->tiktok) }}">
                             @error('tiktok')<div class="invalid-feedback">{{ $message }}</div>@enderror

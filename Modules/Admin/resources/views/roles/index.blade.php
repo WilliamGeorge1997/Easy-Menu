@@ -16,7 +16,7 @@
                         <tr>
                             <th>#</th>
                             <th>{{ __('dashboard/admins.role') }}</th>
-                            <th>Guard</th>
+                            <th>{{ __('dashboard/roles.guard') }}</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
@@ -30,7 +30,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="text-center py-4">No roles found.</td>
+                                <td colspan="3" class="text-center py-4">{{ __('dashboard/roles.no_roles') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

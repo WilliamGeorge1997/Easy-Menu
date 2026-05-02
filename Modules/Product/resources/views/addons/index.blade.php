@@ -5,38 +5,19 @@
 @section('content')
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
+        {{-- Alerts --}}
         @if(session('success'))
             <div class="alert alert-success alert-dismissible mb-4" role="alert">
-                <div class="d-flex align-items-center gap-2">
-                    <i class="bx bx-check-circle fs-5"></i>
-                    {{ session('success') }}
-                </div>
+                {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
         @if(session('error'))
             <div class="alert alert-danger alert-dismissible mb-4" role="alert">
-                <div class="d-flex align-items-center gap-2">
-                    <i class="bx bx-error-circle fs-5"></i>
-                    {{ session('error') }}
-                </div>
+                {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-
-        <div class="d-flex align-items-center justify-content-between mb-4">
-            <div>
-                <h4 class="fw-bold mb-1 d-flex align-items-center gap-2">
-                    <span class="avatar avatar-sm bg-label-primary rounded d-flex align-items-center justify-content-center">
-                        <i class="bx bx-list-ul"></i>
-                    </span>
-                    {{ __('dashboard/addons.addons') }}
-                </h4>
-                <p class="text-muted mb-0" style="font-size: 0.875rem;">
-                    {{ __('dashboard/addons.manage_groups') }}
-                </p>
-            </div>
-        </div>
 
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
@@ -59,7 +40,7 @@
                             <th>{{ __('dashboard/addons.actions') }}</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-border-bottom-0">
                         @forelse($addons as $addon)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -113,4 +94,5 @@
         </div>
     </div>
 </div>
+<div class="content-backdrop fade"></div>
 @endsection

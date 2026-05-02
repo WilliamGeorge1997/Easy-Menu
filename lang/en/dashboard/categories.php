@@ -12,6 +12,8 @@ return [
     'description_ar'       => 'Description (Arabic)',
     'image'                => 'Image',
     'current_image'        => 'Current Image',
+    'image_upload_hint'    => 'Click to browse or drag and drop',
+    'remove_image'         => 'Remove image',
     'order'                => 'Order',
     'is_active'            => 'Active',
     'status'               => 'Status',
@@ -27,4 +29,5 @@ return [
     'save'                 => 'Save',
     'cancel'               => 'Cancel',
     'confirm_delete'       => 'Are you sure you want to delete this category?',
+    'branch_required_for_super_admin' => 'Branch is required for Super Admin.',
 ];

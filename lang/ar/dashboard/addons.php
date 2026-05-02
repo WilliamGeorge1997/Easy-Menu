@@ -47,4 +47,5 @@ return [
     'value_title_en_required' => 'يجب أن تحتوي كل قيمة على عنوان إنجليزي.',
     'value_title_ar_required' => 'يجب أن تحتوي كل قيمة على عنوان عربي.',
     'value_price_required' => 'يجب أن تحتوي كل قيمة على سعر.',
+    'multiple_selection_allowed' => 'يسمح بتحديد أكثر من خيار.',
 ];

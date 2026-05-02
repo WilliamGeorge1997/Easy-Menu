@@ -19,6 +19,8 @@ return [
     'category'             => 'Category',
     'images'               => 'Images',
     'current_images'       => 'Current Images',
+    'images_upload_hint'   => 'Click to browse or drag and drop',
+    'remove_images'        => 'Remove images',
     'created_successfully' => 'Product created successfully.',
     'updated_successfully' => 'Product updated successfully.',
     'deleted_successfully' => 'Product deleted successfully.',
@@ -33,4 +35,5 @@ return [
     'confirm_delete_image' => 'Are you sure you want to delete this image?',
     'first'                => 'First',
     'image_delete_failed'  => 'Failed to delete image. Please try again.',
+    'branch_required_for_super_admin' => 'Branch is required for Super Admin.',
 ];

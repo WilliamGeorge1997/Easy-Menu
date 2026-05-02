@@ -204,9 +204,8 @@
                                 </div>
 
                                 <div class="col-12">
-                                    <label class="form-label fw-medium" for="addon_ids">Addons</label>
+                                    <label class="form-label fw-medium" for="addon_ids">{{ __('dashboard/addons.addons') }}</label>
                                     <div class="input-group @error('addon_ids') has-validation @enderror">
-                                        <span class="input-group-text"><i class="bx bx-list-check"></i></span>
                                         @php($selectedAddonIds = old('addon_ids', $product->addons->pluck('id')->toArray()))
                                         <select name="addon_ids[]" id="addon_ids" multiple class="form-select @error('addon_ids') is-invalid @enderror" size="5">
                                             @foreach($addons as $addon)
@@ -217,7 +216,7 @@
                                         </select>
                                         @error('addon_ids') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                     </div>
-                                    <small class="text-muted">Multiple selection allowed.</small>
+                                    <small class="text-muted">{{ __('dashboard/addons.multiple_selection_allowed') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +251,7 @@
                                         </span>
                                     </div>
                                     <p class="fw-semibold mb-1" style="font-size:.95rem;">{{ __('dashboard/products.images') }}</p>
-                                    <p class="text-muted mb-3" style="font-size:.8rem;">Click to browse or drag and drop</p>
+                                    <p class="text-muted mb-3" style="font-size:.8rem;">{{ __('dashboard/products.images_upload_hint') }}</p>
                                     <span class="badge bg-label-secondary px-3 py-2" style="font-size:.75rem;">JPG • JPEG • PNG • WEBP</span>
                                 </div>
                                 <div id="images-preview-wrap" style="display:none;width:100%;">
@@ -263,7 +262,7 @@
                             <button type="button" id="remove-images"
                                 class="btn btn-sm btn-danger mt-2 w-100 d-flex align-items-center justify-content-center gap-1"
                                 disabled>
-                                <i class="bx bx-trash"></i> Remove images
+                                <i class="bx bx-trash"></i> {{ __('dashboard/products.remove_images') }}
                             </button>
 
                             @error('images.*')

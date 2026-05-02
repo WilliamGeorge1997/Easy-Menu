@@ -18,6 +18,9 @@
     <!-- Main JS -->
     <script src="{{ asset('dashboard/assets/js/main.js') }}"></script>
 
+    <!-- Multi-select badges -->
+    <script src="{{ asset('dashboard/assets/js/multi-select-badges.js') }}"></script>
+
     <!-- Page JS -->
 
     <!-- Place this tag in your head or just before your close body tag. -->
