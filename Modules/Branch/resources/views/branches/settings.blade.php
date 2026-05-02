@@ -3,6 +3,10 @@
 @section('title', __('dashboard/branches.branch_settings'))
 
 @section('content')
+@php
+    $isSuperAdmin = auth('admin')->user()?->hasRole(config('admin.roles.super_admin'));
+    $backUrl = $isSuperAdmin ? route('admin.branches.index') : route('admin.dashboard');
+@endphp
 <div class="content-wrapper">
     <div class="container-xxl flex-grow-1 container-p-y">
         @if(session('success'))
@@ -36,7 +40,7 @@
                     {{ __('dashboard/branches.branch_settings') }} -
                     {{ $branch->getTranslation('title', app()->getLocale()) }}
                 </h5>
-                <a href="{{ route('admin.branches.index') }}" class="btn btn-secondary btn-sm">
+                <a href="{{ $backUrl }}" class="btn btn-secondary btn-sm">
                     <i class="bx bx-arrow-back me-1"></i> {{ __('dashboard/branches.cancel') }}
                 </a>
             </div>
@@ -197,7 +201,7 @@
                         <button type="submit" class="btn btn-primary me-2 btn-loader">
                             <i class="bx bx-save me-1"></i> {{ __('dashboard/branches.save') }}
                         </button>
-                        <a href="{{ route('admin.branches.index') }}" class="btn btn-secondary">
+                        <a href="{{ $backUrl }}" class="btn btn-secondary">
                             {{ __('dashboard/branches.cancel') }}
                         </a>
                     </div>

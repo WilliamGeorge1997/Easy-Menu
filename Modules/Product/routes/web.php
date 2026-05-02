@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Modules\Product\Http\Controllers\AddonController;
 use Modules\Product\Http\Controllers\ProductController;
 
 Route::prefix('admin')->name('admin.')->middleware(['web', 'auth:admin', 'admin.locale'])->group(function () {
@@ -11,4 +12,7 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth:admin', 'admin.
     Route::post('products/{product}/activate', [ProductController::class, 'activate'])->name('products.activate');
 
     Route::resource('products', ProductController::class)->except(['show']);
+
+    Route::post('addons/{addon}/activate', [AddonController::class, 'activate'])->name('addons.activate');
+    Route::resource('addons', AddonController::class)->except(['show']);
 });

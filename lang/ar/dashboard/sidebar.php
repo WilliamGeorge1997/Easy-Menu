@@ -12,4 +12,6 @@ return [
     'categories' => 'الاقسام',
     'products' => 'المنتجات',
     'addons' => 'الاضافات',
+    'branch_management' => 'إدارة الفرع',
+    'my_branch' => 'فرعي',
 ];

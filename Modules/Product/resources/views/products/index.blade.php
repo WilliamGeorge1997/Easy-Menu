@@ -24,8 +24,9 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0">{{ __('dashboard/products.products') }}</h5>
                 @can('create', \Modules\Product\Models\Product::class)
-                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary btn-sm">
-                        <i class="bx bx-plus me-1"></i> {{ __('dashboard/products.create_product') }}
+                    <a href="{{ route('admin.products.create') }}" class="btn btn-primary d-flex align-items-center gap-1">
+                        <i class="bx bx-plus"></i>
+                        <span>{{ __('dashboard/products.create_product') }}</span>
                     </a>
                 @endcan
             </div>

@@ -2,14 +2,14 @@
 
 namespace Modules\Category\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Modules\Category\DTO\CategoryDto;
-use Modules\Category\Services\CategoryService;
+use Modules\Branch\Services\BranchService;
+use Modules\Category\DTOs\CategoryDto;
 use Modules\Category\Http\Requests\CategoryRequest;
 use Modules\Category\Models\Category;
-use Modules\Branch\Services\BranchService;
+use Modules\Category\Services\CategoryService;
 
 class CategoryController extends Controller
 {
@@ -30,6 +30,7 @@ class CategoryController extends Controller
         try {
             $this->authorize('viewAny', Category::class);
             $categories = $this->service->findAll($request->all(), ['branch']);
+
             return view('category::categories.index', compact('categories'));
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             abort(403);
@@ -46,6 +47,7 @@ class CategoryController extends Controller
         try {
             $this->authorize('create', Category::class);
             $branches = $this->branchService->active();
+
             return view('category::categories.create', compact('branches'));
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             abort(403);
@@ -62,6 +64,7 @@ class CategoryController extends Controller
         try {
             $data = (new CategoryDto($request))->dataFromRequest();
             $this->service->save($data);
+
             return redirect()->route('admin.categories.index')->with('success', __('dashboard/categories.created_successfully'));
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -76,6 +79,7 @@ class CategoryController extends Controller
         try {
             $this->authorize('update', $category);
             $branches = $this->branchService->active();
+
             return view('category::categories.edit', compact('category', 'branches'));
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             abort(403);
@@ -92,6 +96,7 @@ class CategoryController extends Controller
         try {
             $data = (new CategoryDto($request))->dataFromRequest();
             $this->service->update($category->id, $data);
+
             return redirect()->route('admin.categories.index')->with('success', __('dashboard/categories.updated_successfully'));
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());
@@ -106,6 +111,7 @@ class CategoryController extends Controller
         try {
             $this->authorize('activate', $category);
             $this->service->activate($category->id);
+
             return back()->with('success', __('dashboard/categories.status_updated'));
         } catch (\Illuminate\Auth\Access\AuthorizationException $e) {
             abort(403);
@@ -121,6 +127,7 @@ class CategoryController extends Controller
     {
         try {
             $this->service->delete($category->id);
+
             return redirect()->route('admin.categories.index')->with('success', __('dashboard/categories.deleted_successfully'));
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage());

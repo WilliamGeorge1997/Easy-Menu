@@ -2,12 +2,12 @@
 
 namespace Modules\Branch\Http\Controllers;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Modules\Branch\DTO\BranchDto;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+use Modules\Branch\DTOs\BranchDto;
 use Modules\Branch\Http\Requests\BranchRequest;
 use Modules\Branch\Http\Requests\BranchSettingRequest;
 use Modules\Branch\Http\Requests\WorkHourRequest;
@@ -29,9 +29,11 @@ class BranchController extends Controller
 
     public function index(Request $request)
     {
+        $this->ensureSuperAdmin();
         try {
             $this->authorize('viewAny', Branch::class);
             $branches = $this->branchService->findAll($request->all());
+
             return view('branch::branches.index', compact('branches'));
         } catch (\Exception $e) {
             abort(403);
@@ -40,8 +42,10 @@ class BranchController extends Controller
 
     public function create()
     {
+        $this->ensureSuperAdmin();
         try {
             $this->authorize('create', Branch::class);
+
             return view('branch::branches.create');
         } catch (\Exception $e) {
             abort(403);
@@ -50,20 +54,27 @@ class BranchController extends Controller
 
     public function store(BranchRequest $request)
     {
+        $this->ensureSuperAdmin();
         try {
             $data = (new BranchDto($request))->dataFromRequest();
             $this->branchService->save($data);
+
             return redirect()->route('admin.branches.index')->with('success', __('dashboard/branches.created_successfully'));
         } catch (\Exception $e) {
-            logger()->error('Branch store failed: ' . $e->getMessage());
+            logger()->error('Branch store failed: '.$e->getMessage());
+
             return redirect()->back()->with('error', __('dashboard/branches.something_went_wrong'))->withInput();
         }
     }
 
     public function edit(Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
-            $this->authorize('update', $branch);
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
+
             return view('branch::branches.edit', compact('branch'));
         } catch (\Exception $e) {
             abort(403);
@@ -72,10 +83,24 @@ class BranchController extends Controller
 
     public function update(BranchRequest $request, Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
+            $isSuperAdmin = $this->isSuperAdmin();
+            if ($isSuperAdmin) {
+                $this->authorize('update', $branch);
+            }
+
             $data = (new BranchDto($request))->dataFromRequestForUpdate();
+            if (! $isSuperAdmin) {
+                unset($data['is_active']);
+            }
+
             $this->branchService->update($branch->id, $data);
-            return redirect()->route('admin.branches.index')->with('success', __('dashboard/branches.updated_successfully'));
+
+            $redirectRoute = $isSuperAdmin ? 'admin.branches.index' : 'admin.branches.edit';
+
+            return redirect()->route($redirectRoute, $isSuperAdmin ? [] : $branch->id)
+                ->with('success', __('dashboard/branches.updated_successfully'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage())->withInput();
         }
@@ -83,9 +108,11 @@ class BranchController extends Controller
 
     public function activate(Branch $branch)
     {
+        $this->ensureSuperAdmin();
         try {
             $this->authorize('activate', $branch);
             $this->branchService->activate($branch->id);
+
             return redirect()->back()->with('success', __('dashboard/branches.status_updated'));
         } catch (\Exception $e) {
             abort(403);
@@ -94,9 +121,11 @@ class BranchController extends Controller
 
     public function destroy(Branch $branch)
     {
+        $this->ensureSuperAdmin();
         try {
             $this->authorize('delete', $branch);
             $this->branchService->delete($branch->id);
+
             return redirect()->route('admin.branches.index')->with('success', __('dashboard/branches.deleted_successfully'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -105,8 +134,11 @@ class BranchController extends Controller
 
     public function editWorkHours(Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
-            $this->authorize('update', $branch);
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
 
             $days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             $workHours = $branch->workHours()->get()->keyBy('day');
@@ -119,15 +151,18 @@ class BranchController extends Controller
 
     public function updateWorkHours(WorkHourRequest $request, Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
-            $this->authorize('update', $branch);
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
 
             DB::transaction(function () use ($request, $branch) {
                 WorkHour::where('branch_id', $branch->id)->delete();
 
                 $rows = collect($request->validated('hours'))
-                    ->filter(fn(array $item) => ! (bool) ($item['is_closed'] ?? false))
-                    ->map(fn(array $item) => [
+                    ->filter(fn (array $item) => ! (bool) ($item['is_closed'] ?? false))
+                    ->map(fn (array $item) => [
                         'branch_id' => $branch->id,
                         'day' => $item['day'],
                         'from' => $item['from'],
@@ -153,8 +188,11 @@ class BranchController extends Controller
 
     public function editSettings(Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
-            $this->authorize('update', $branch);
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
             $setting = BranchSetting::firstOrNew(['branch_id' => $branch->id]);
 
             return view('branch::branches.settings', compact('branch', 'setting'));
@@ -163,10 +201,29 @@ class BranchController extends Controller
         }
     }
 
+    public function qrCode(Branch $branch)
+    {
+        $this->ensureCanManageBranch($branch);
+        try {
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
+
+            $branchUrl = rtrim((string) config('app.frontend_url', config('app.url')), '/').'/'.$branch->slug;
+
+            return view('branch::branches.qr-code', compact('branch', 'branchUrl'));
+        } catch (\Exception $e) {
+            abort(403);
+        }
+    }
+
     public function updateSettings(BranchSettingRequest $request, Branch $branch)
     {
+        $this->ensureCanManageBranch($branch);
         try {
-            $this->authorize('update', $branch);
+            if ($this->isSuperAdmin()) {
+                $this->authorize('update', $branch);
+            }
 
             DB::transaction(function () use ($request, $branch) {
                 $setting = BranchSetting::firstOrNew(['branch_id' => $branch->id]);
@@ -189,7 +246,7 @@ class BranchController extends Controller
 
                 if ($request->hasFile('logo')) {
                     if (! empty($setting->logo)) {
-                        File::delete(public_path('uploads/branch-settings/' . $setting->logo));
+                        File::delete(public_path('uploads/branch-settings/'.$setting->logo));
                     }
                     $data['logo'] = $this->upload($request->file('logo'), 'branch-settings');
                 }
@@ -205,5 +262,44 @@ class BranchController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage())->withInput();
         }
+    }
+
+    private function ensureSuperAdmin(): void
+    {
+        /** @var \Modules\Admin\Models\Admin|null $admin */
+        $admin = auth('admin')->user();
+        if (! $admin || ! $this->isSuperAdmin()) {
+            abort(403);
+        }
+    }
+
+    private function ensureCanManageBranch(Branch $branch): void
+    {
+        /** @var \Modules\Admin\Models\Admin|null $admin */
+        $admin = auth('admin')->user();
+        if (! $admin) {
+            abort(403);
+        }
+
+        if ($this->isSuperAdmin()) {
+            return;
+        }
+
+        if (
+            $admin->hasRole(config('admin.roles.branch_manager'))
+            && (int) $admin->branch_id === (int) $branch->id
+        ) {
+            return;
+        }
+
+        abort(403);
+    }
+
+    private function isSuperAdmin(): bool
+    {
+        /** @var \Modules\Admin\Models\Admin|null $admin */
+        $admin = auth('admin')->user();
+
+        return (bool) $admin?->hasRole(config('admin.roles.super_admin'));
     }
 }

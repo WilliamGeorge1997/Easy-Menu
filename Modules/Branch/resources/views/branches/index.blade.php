@@ -24,8 +24,9 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0">{{ __('dashboard/branches.branches') }}</h5>
                 @can('create', \Modules\Branch\Models\Branch::class)
-                    <a href="{{ route('admin.branches.create') }}" class="btn btn-primary btn-sm">
-                        <i class="bx bx-plus me-1"></i> {{ __('dashboard/branches.create_branch') }}
+                    <a href="{{ route('admin.branches.create') }}" class="btn btn-primary d-flex align-items-center gap-1">
+                        <i class="bx bx-plus"></i>
+                        <span>{{ __('dashboard/branches.create_branch') }}</span>
                     </a>
                 @endcan
             </div>
@@ -89,6 +90,9 @@
                                             @can('update', $branch)
                                                 <a class="dropdown-item" href="{{ route('admin.branches.edit', $branch->id) }}">
                                                     <i class="bx bx-edit-alt me-1"></i> {{ __('dashboard/branches.edit_branch') }}
+                                                </a>
+                                                <a class="dropdown-item" href="{{ route('admin.branches.qr-code', $branch->id) }}">
+                                                    <i class="bx bx-qr me-1"></i> {{ __('dashboard/branches.qr_code_builder') }}
                                                 </a>
                                                 <a class="dropdown-item" href="{{ route('admin.branches.work-hours.edit', $branch->id) }}">
                                                     <i class="bx bx-time-five me-1"></i> {{ __('dashboard/branches.working_hours') }}

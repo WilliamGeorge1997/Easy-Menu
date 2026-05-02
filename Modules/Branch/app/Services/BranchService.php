@@ -2,14 +2,14 @@
 
 namespace Modules\Branch\Services;
 
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\File;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Modules\Branch\Models\Branch;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Modules\Admin\Models\Admin;
-use Spatie\Permission\Models\Role;
+use Modules\Branch\Models\Branch;
 use Modules\Common\Helpers\UploadHelper;
+use Spatie\Permission\Models\Role;
 
 class BranchService
 {
@@ -18,6 +18,7 @@ class BranchService
     public function findAll(array $data = [], array $relations = []): Collection|LengthAwarePaginator
     {
         $query = Branch::query()->with($relations)->filter($data)->latest();
+
         return getCaseCollection($query, $data);
     }
 
@@ -42,12 +43,12 @@ class BranchService
 
             // Extract admin fields from request (not from DTO data array)
             $adminData = [
-                'name'      => request('admin_name'),
-                'email'     => request('admin_email'),
-                'phone'     => request('admin_phone'),
-                'password'  => bcrypt(request('admin_password')),
+                'name' => request('admin_name'),
+                'email' => request('admin_email'),
+                'phone' => request('admin_phone'),
+                'password' => bcrypt(request('admin_password')),
                 'is_active' => 1,
-                'lang'      => config('app.locale', 'en'),
+                'lang' => config('app.locale', 'en'),
             ];
 
             $branch = Branch::create($data);
@@ -61,6 +62,7 @@ class BranchService
             $admin->assignRole($role);
 
             DB::commit();
+
             return $branch;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -70,15 +72,15 @@ class BranchService
 
     private function generateUniqueSlug(string $base, ?int $excludeId = null): string
     {
-        $slug      = $base;
-        $counter   = 2;
+        $slug = $base;
+        $counter = 2;
 
         while (
             Branch::where('slug', $slug)
-                ->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))
+                ->when($excludeId, fn ($q) => $q->where('id', '!=', $excludeId))
                 ->exists()
         ) {
-            $slug = $base . '-' . $counter++;
+            $slug = $base.'-'.$counter++;
         }
 
         return $slug;
@@ -91,12 +93,13 @@ class BranchService
             $record = $this->findById($id);
             if (request()->hasFile('image')) {
                 if ($record->getRawOriginal('image')) {
-                    File::delete(public_path('uploads/branches/' . $this->getImageName('branches', $record->image)));
+                    File::delete(public_path('uploads/branches/'.$this->getImageName('branches', $record->image)));
                 }
                 $data['image'] = $this->upload(request()->file('image'), 'branches');
             }
             $record->update($data);
             DB::commit();
+
             return $record;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -107,7 +110,7 @@ class BranchService
     public function activate(int $id): void
     {
         $record = $this->findById($id);
-        $record->is_active = !$record->is_active;
+        $record->is_active = ! $record->is_active;
         $record->save();
     }
 
@@ -115,7 +118,7 @@ class BranchService
     {
         $record = $this->findById($id);
         if ($record->getRawOriginal('image')) {
-            File::delete(public_path('uploads/branches/' . $this->getImageName('branches', $record->image)));
+            File::delete(public_path('uploads/branches/'.$this->getImageName('branches', $record->image)));
         }
         $record->delete();
     }

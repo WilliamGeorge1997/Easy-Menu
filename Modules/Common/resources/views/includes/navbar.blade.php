@@ -1,5 +1,9 @@
  <nav class="layout-navbar container-xxl navbar-detached navbar navbar-expand-xl align-items-center bg-navbar-theme"
      id="layout-navbar">
+    @php
+        $admin = auth('admin')->user();
+        $adminRole = $admin?->roles?->first();
+    @endphp
      <div class="navbar-nav-right d-flex align-items-center justify-content-end" id="navbar-collapse">
          <ul class="navbar-nav flex-row align-items-center ms-auto">
              <!-- Language Switcher -->
@@ -34,49 +38,55 @@
                   <a class="nav-link dropdown-toggle hide-arrow p-0" href="javascript:void(0);"
                       data-bs-toggle="dropdown">
                       <div class="avatar avatar-online">
-                          <span class="avatar-initial rounded-circle bg-label-primary">
-                              <i class="icon-base bx bx-user icon-md"></i>
-                          </span>
+                        @if(!empty($admin?->image))
+                            <img src="{{ $admin->image }}" alt="{{ $admin->name }}" class="w-px-40 h-px-40 rounded-circle object-fit-cover">
+                         @else
+                             <span class="avatar-initial rounded-circle bg-label-primary">
+                                 <i class="icon-base bx bx-user icon-md"></i>
+                             </span>
+                         @endif
                       </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                       <li>
-                          <a class="dropdown-item" href="#">
+                         <div class="dropdown-item">
                               <div class="d-flex">
                                   <div class="flex-shrink-0 me-3">
                                       <div class="avatar avatar-online">
-                                          <span class="avatar-initial rounded-circle bg-label-primary">
-                                              <i class="icon-base bx bx-user icon-md"></i>
-                                          </span>
+                                         @if(!empty($admin?->image))
+                                             <img src="{{ $admin->image }}" alt="{{ $admin->name }}" class="w-px-40 h-px-40 rounded-circle object-fit-cover">
+                                          @else
+                                              <span class="avatar-initial rounded-circle bg-label-primary">
+                                                  <i class="icon-base bx bx-user icon-md"></i>
+                                              </span>
+                                          @endif
                                       </div>
                                   </div>
                                   <div class="flex-grow-1">
-                                      <h6 class="mb-0">John Doe</h6>
-                                      <small class="text-body-secondary">Admin</small>
+                                      <h6 class="mb-0">{{ $admin?->name ?? 'Admin' }}</h6>
+                                      <small class="text-body-secondary">{{ $adminRole?->display ?? $adminRole?->name ?? 'Admin' }}</small>
                                   </div>
                               </div>
+                         </div>
+                      </li>
+                      <li>
+                          <div class="dropdown-divider my-1"></div>
+                      </li>
+                      <li>
+                          <a class="dropdown-item" href="{{ route('admin.profile.edit') }}">
+                              <i class="icon-base bx bx-user icon-md me-3"></i><span>{{ __('dashboard/admins.my_profile') }}</span>
                           </a>
                       </li>
                       <li>
                           <div class="dropdown-divider my-1"></div>
                       </li>
                       <li>
-                          <a class="dropdown-item" href="#">
-                              <i class="icon-base bx bx-user icon-md me-3"></i><span>My Profile</span>
-                          </a>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="#">
-                              <i class="icon-base bx bx-cog icon-md me-3"></i><span>Settings</span>
-                          </a>
-                      </li>
-                      <li>
-                          <div class="dropdown-divider my-1"></div>
-                      </li>
-                      <li>
-                          <a class="dropdown-item" href="javascript:void(0);">
-                              <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
-                          </a>
+                         <form action="{{ route('admin.logout') }}" method="POST">
+                             @csrf
+                             <button type="submit" class="dropdown-item border-0 bg-transparent w-100 text-start">
+                                 <i class="icon-base bx bx-power-off icon-md me-3"></i><span>Log Out</span>
+                             </button>
+                         </form>
                       </li>
                   </ul>
               </li>

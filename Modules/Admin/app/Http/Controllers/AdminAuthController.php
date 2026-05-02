@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Modules\Admin\Http\Requests\AdminLoginRequest;
@@ -30,5 +31,14 @@ class AdminAuthController extends Controller
         throw ValidationException::withMessages([
             'login' => [__('auth.failed')],
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('admin.login.form');
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
 return [
-    'name'          => 'Product',
+    'name' => 'Product',
     'images_folder' => 'products',
-    'roles'         => [
-        'super_admin'    => 'super_admin',
+    'addon_values_images_folder' => 'addon-values',
+    'roles' => [
+        'super_admin' => 'super_admin',
         'branch_manager' => 'branch_manager',
     ],
 ];

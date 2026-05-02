@@ -1,5 +1,10 @@
 @php
     $path = request()->path();
+    /** @var \Modules\Admin\Models\Admin|null $authAdmin */
+    $authAdmin = auth('admin')->user();
+    $isSuperAdmin = $authAdmin?->hasRole(config('admin.roles.super_admin'));
+    $isBranchManager = $authAdmin?->hasRole(config('admin.roles.branch_manager'));
+    $managedBranchId = $authAdmin?->branch_id;
 @endphp
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
@@ -73,32 +78,69 @@
             </a>
         </li>
 
-        {{-- Users --}}
-        <li class="menu-item{{ request()->is('admin/admins*', 'admin/branches*', 'admin/roles*') ? ' active open' : '' }}">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-group"></i>
-                <div class="text-truncate" data-i18n="Users Management">{{ __('dashboard/sidebar.users_managment') }}
-                </div>
-                {{-- <span class="badge rounded-pill bg-danger ms-auto">5</span> --}}
-            </a>
-            <ul class="menu-sub">
-                <li class="menu-item{{ request()->is('admin/admins*') ? ' active' : '' }}">
-                    <a href="{{  route('admin.admins.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Admins">{{ __('dashboard/sidebar.admins') }}</div>
-                    </a>
-                </li>
-                <li class="menu-item{{ request()->is('admin/branches*') ? ' active' : '' }}">
-                    <a href="{{ route('admin.branches.index') }}" class="menu-link">
-                        <div class="text-truncate" data-i18n="Branches">{{ __('dashboard/sidebar.branches') }}</div>
-                    </a>
-                </li>
-                <li class="menu-item{{ request()->is('admin/roles*') ? ' active' : '' }}">
-                    <a href="" class="menu-link">
-                        <div class="text-truncate" data-i18n="Roles">{{ __('dashboard/sidebar.roles') }}</div>
-                    </a>
-                </li>
-            </ul>
-        </li>
+        @if($isSuperAdmin)
+            {{-- Users --}}
+            <li class="menu-item{{ request()->is('admin/admins*', 'admin/branches*', 'admin/roles*') ? ' active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-group"></i>
+                    <div class="text-truncate" data-i18n="Users Management">{{ __('dashboard/sidebar.users_managment') }}
+                    </div>
+                    {{-- <span class="badge rounded-pill bg-danger ms-auto">5</span> --}}
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item{{ request()->is('admin/admins*') ? ' active' : '' }}">
+                        <a href="{{  route('admin.admins.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Admins">{{ __('dashboard/sidebar.admins') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is('admin/branches*') ? ' active' : '' }}">
+                        <a href="{{ route('admin.branches.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Branches">{{ __('dashboard/sidebar.branches') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is('admin/roles*') ? ' active' : '' }}">
+                        <a href="{{ route('admin.roles.index') }}" class="menu-link">
+                            <div class="text-truncate" data-i18n="Roles">{{ __('dashboard/sidebar.roles') }}</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
+
+        @if($isBranchManager && $managedBranchId)
+            <li class="menu-header small text-uppercase">
+                <span class="menu-header-text">{{ __('dashboard/sidebar.branch_management') }}</span>
+            </li>
+
+            <li class="menu-item{{ request()->is("admin/branches/{$managedBranchId}/edit", "admin/branches/{$managedBranchId}/settings", "admin/branches/{$managedBranchId}/work-hours", "admin/branches/{$managedBranchId}/qr-code") ? ' active open' : '' }}">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <i class="menu-icon tf-icons bx bx-store"></i>
+                    <div class="text-truncate" data-i18n="My Branch">{{ __('dashboard/sidebar.my_branch') }}</div>
+                </a>
+                <ul class="menu-sub">
+                    <li class="menu-item{{ request()->is("admin/branches/{$managedBranchId}/edit") ? ' active' : '' }}">
+                        <a href="{{ route('admin.branches.edit', $managedBranchId) }}" class="menu-link">
+                            <div class="text-truncate">{{ __('dashboard/branches.edit_branch') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is("admin/branches/{$managedBranchId}/settings") ? ' active' : '' }}">
+                        <a href="{{ route('admin.branches.settings.edit', $managedBranchId) }}" class="menu-link">
+                            <div class="text-truncate">{{ __('dashboard/branches.branch_settings') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is("admin/branches/{$managedBranchId}/work-hours") ? ' active' : '' }}">
+                        <a href="{{ route('admin.branches.work-hours.edit', $managedBranchId) }}" class="menu-link">
+                            <div class="text-truncate">{{ __('dashboard/branches.working_hours') }}</div>
+                        </a>
+                    </li>
+                    <li class="menu-item{{ request()->is("admin/branches/{$managedBranchId}/qr-code") ? ' active' : '' }}">
+                        <a href="{{ route('admin.branches.qr-code', $managedBranchId) }}" class="menu-link">
+                            <div class="text-truncate">{{ __('dashboard/branches.qr_code_builder') }}</div>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        @endif
 
 
         <!-- Categories & Products -->
@@ -129,7 +171,7 @@
                     </a>
                 </li>
                 <li class="menu-item{{ request()->is('admin/addons*') ? ' active' : '' }}">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.addons.index') }}" class="menu-link">
                         <div class="text-truncate" data-i18n="Addons">{{ __('dashboard/sidebar.addons') }}</div>
                     </a>
                 </li>

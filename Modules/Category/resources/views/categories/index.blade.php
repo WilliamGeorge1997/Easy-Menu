@@ -24,8 +24,9 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0">{{ __('dashboard/categories.categories') }}</h5>
                 @can('create', \Modules\Category\Models\Category::class)
-                    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary btn-sm">
-                        <i class="bx bx-plus me-1"></i> {{ __('dashboard/categories.create_category') }}
+                    <a href="{{ route('admin.categories.create') }}" class="btn btn-primary d-flex align-items-center gap-1">
+                        <i class="bx bx-plus"></i>
+                        <span>{{ __('dashboard/categories.create_category') }}</span>
                     </a>
                 @endcan
             </div>

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'title' => 'لوحة التحكم',
+    'overview' => 'نظرة عامة على لوحة التحكم',
+    'global_statistics' => 'إحصائيات المنصة بالكامل',
+    'branch_snapshot' => 'ملخص أداء الفرع',
+    'products' => 'المنتجات',
+    'active' => 'مفعّل',
+    'inactive' => 'غير مفعّل',
+    'inactive_products' => 'المنتجات غير المفعّلة',
+    'needs_attention' => 'تحتاج متابعة',
+    'categories' => 'التصنيفات',
+    'branches' => 'الفروع',
+    'managed_branches' => 'الفروع المُدارة',
+    'across_admins' => 'على مستوى جميع المدراء',
+    'your_scope' => 'ضمن نطاقك',
+    'products_last_6_months' => 'المنتجات المضافة (آخر 6 أشهر)',
+    'products_by_category' => 'توزيع المنتجات حسب التصنيف',
+    'last_added_products' => 'آخر المنتجات المضافة',
+    'view_all' => 'عرض الكل',
+    'product' => 'المنتج',
+    'category' => 'التصنيف',
+    'branch' => 'الفرع',
+    'status' => 'الحالة',
+    'created_at' => 'تاريخ الإضافة',
+    'no_products_found' => 'لا توجد منتجات.',
+];

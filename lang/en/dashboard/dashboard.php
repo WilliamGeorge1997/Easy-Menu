@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'title' => 'Dashboard',
+    'overview' => 'Dashboard Overview',
+    'global_statistics' => 'Global platform statistics',
+    'branch_snapshot' => 'Branch performance snapshot',
+    'products' => 'Products',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'inactive_products' => 'Inactive Products',
+    'needs_attention' => 'Needs attention',
+    'categories' => 'Categories',
+    'branches' => 'Branches',
+    'managed_branches' => 'Managed Branches',
+    'across_admins' => 'Across all admins',
+    'your_scope' => 'Your scope',
+    'products_last_6_months' => 'Products Created (Last 6 Months)',
+    'products_by_category' => 'Products by Category',
+    'last_added_products' => 'Last Added Products',
+    'view_all' => 'View All',
+    'product' => 'Product',
+    'category' => 'Category',
+    'branch' => 'Branch',
+    'status' => 'Status',
+    'created_at' => 'Created At',
+    'no_products_found' => 'No products found.',
+];

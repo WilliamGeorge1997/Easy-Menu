@@ -22,6 +22,10 @@
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="mb-0">{{ __('dashboard/admins.admins') }}</h5>
+                <a href="{{ route('admin.admins.create') }}" class="btn btn-primary d-flex align-items-center gap-1">
+                    <i class="bx bx-plus"></i>
+                    <span>{{ __('dashboard/admins.create_admin') }}</span>
+                </a>
             </div>
 
             <div class="table-responsive text-nowrap">

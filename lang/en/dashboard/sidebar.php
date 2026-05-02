@@ -12,4 +12,6 @@ return [
     'categories' => 'Categories',
     'products' => 'Products',
     'addons' => 'Addons',
+    'branch_management' => 'Branch Management',
+    'my_branch' => 'My Branch',
 ];

@@ -2,13 +2,14 @@
 
 namespace Modules\Product\Services;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Modules\Common\Helpers\UploadHelper;
+use Modules\Product\Models\Addon;
 use Modules\Product\Models\Product;
 use Modules\Product\Models\ProductImage;
-use Modules\Common\Helpers\UploadHelper;
 
 class ProductService
 {
@@ -34,7 +35,7 @@ class ProductService
     {
         return Product::active()
             ->with($relations)
-            ->when($branchId, fn($q) => $q->where('branch_id', $branchId))
+            ->when($branchId, fn ($q) => $q->where('branch_id', $branchId))
             ->orderBy('order')
             ->get();
     }
@@ -43,7 +44,10 @@ class ProductService
     {
         DB::beginTransaction();
         try {
+            $addonIds = $data['addon_ids'] ?? [];
+            unset($data['addon_ids']);
             $record = Product::create($data);
+            $record->addons()->sync($this->resolveAddonIdsForBranch((int) $record->branch_id, $addonIds));
 
             foreach ($images as $image) {
                 $fileName = $this->upload($image, config('product.images_folder'));
@@ -51,6 +55,7 @@ class ProductService
             }
 
             DB::commit();
+
             return $record;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -63,7 +68,10 @@ class ProductService
         DB::beginTransaction();
         try {
             $record = $this->findById($id);
+            $addonIds = $data['addon_ids'] ?? [];
+            unset($data['addon_ids']);
             $record->update($data);
+            $record->addons()->sync($this->resolveAddonIdsForBranch((int) $record->branch_id, $addonIds));
 
             foreach ($images as $image) {
                 $fileName = $this->upload($image, config('product.images_folder'));
@@ -71,6 +79,7 @@ class ProductService
             }
 
             DB::commit();
+
             return $record;
         } catch (\Exception $e) {
             DB::rollBack();
@@ -81,14 +90,14 @@ class ProductService
     public function deleteImage(int $imageId): void
     {
         $image = ProductImage::findOrFail($imageId);
-        File::delete(public_path('uploads/' . config('product.images_folder') . '/' . $this->getImageName(config('product.images_folder'), $image->getOriginal('image'))));
+        File::delete(public_path('uploads/'.config('product.images_folder').'/'.$this->getImageName(config('product.images_folder'), $image->getOriginal('image'))));
         $image->delete();
     }
 
     public function activate(int $id): void
     {
         $record = $this->findById($id);
-        $record->is_active = !$record->is_active;
+        $record->is_active = ! $record->is_active;
         $record->save();
     }
 
@@ -97,9 +106,23 @@ class ProductService
         $record = $this->findById($id, ['images']);
 
         foreach ($record->images as $image) {
-            File::delete(public_path('uploads/' . config('product.images_folder') . '/' . $this->getImageName(config('product.images_folder'), $image->getOriginal('image'))));
+            File::delete(public_path('uploads/'.config('product.images_folder').'/'.$this->getImageName(config('product.images_folder'), $image->getOriginal('image'))));
         }
 
         $record->delete();
+    }
+
+    private function resolveAddonIdsForBranch(int $branchId, array $addonIds): array
+    {
+        if (empty($addonIds)) {
+            return [];
+        }
+
+        return Addon::query()
+            ->whereIn('id', $addonIds)
+            ->where('branch_id', $branchId)
+            ->pluck('id')
+            ->values()
+            ->all();
     }
 }
