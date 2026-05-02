@@ -12,6 +12,8 @@ class ProductDto
 
     public $price;
 
+    public $discounted_price;
+
     public $order;
 
     public $is_active;
@@ -27,6 +29,9 @@ class ProductDto
         $this->title = ['en' => $request->get('title_en'), 'ar' => $request->get('title_ar')];
         $this->description = ['en' => $request->get('description_en'), 'ar' => $request->get('description_ar')];
         $this->price = $request->get('price', 0);
+        $this->discounted_price = $request->filled('discounted_price')
+            ? $request->get('discounted_price')
+            : null;
         $this->order = $request->get('order', 1);
         $this->is_active = isset($request['is_active']) ? 1 : 0;
         $this->category_id = $request->get('category_id');

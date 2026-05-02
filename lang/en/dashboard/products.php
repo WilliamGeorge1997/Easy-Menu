@@ -11,6 +11,7 @@ return [
     'description_en'       => 'Description (English)',
     'description_ar'       => 'Description (Arabic)',
     'price'                => 'Price',
+    'discounted_price'     => 'Discounted price',
     'order'                => 'Order',
     'is_active'            => 'Active',
     'status'               => 'Status',

@@ -19,6 +19,7 @@ class Product extends Model
         'title',
         'description',
         'price',
+        'discounted_price',
         'order',
         'is_active',
     ];

@@ -126,7 +126,7 @@
                         </div>
                         <div class="card-body pt-4">
                             <div class="row g-3">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label class="form-label fw-medium" for="price">{{ __('dashboard/products.price') }} <span class="text-danger">*</span></label>
                                     <div class="input-group @error('price') has-validation @enderror" dir="ltr">
                                         <span class="input-group-text"><i class="bx bx-money"></i></span>
@@ -137,7 +137,18 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <label class="form-label fw-medium" for="discounted_price">{{ __('dashboard/products.discounted_price') }}</label>
+                                    <div class="input-group @error('discounted_price') has-validation @enderror" dir="ltr">
+                                        <span class="input-group-text"><i class="bx bx-purchase-tag-alt"></i></span>
+                                        <input type="number" id="discounted_price" name="discounted_price" step="0.01" min="0"
+                                            class="form-control @error('discounted_price') is-invalid @enderror"
+                                            value="{{ old('discounted_price') }}">
+                                        @error('discounted_price') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     <label class="form-label fw-medium" for="order">{{ __('dashboard/products.order') }}</label>
                                     <div class="input-group @error('order') has-validation @enderror" dir="ltr">
                                         <span class="input-group-text"><i class="bx bx-sort"></i></span>
@@ -148,7 +159,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4 d-flex align-items-end pb-1">
+                                <div class="col-md-3 d-flex align-items-end pb-1">
                                     <div class="d-flex align-items-center gap-3 p-3 rounded border w-100" style="background: var(--bs-light, #f8f9fa);">
                                         <div class="form-check form-switch mb-0">
                                             <input class="form-check-input" type="checkbox" name="is_active" id="is_active" value="1"

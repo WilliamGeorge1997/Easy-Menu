@@ -3,5 +3,7 @@
     "Common": true,
     "Branch": true,
     "Category": true,
-    "Product": true
+    "Product": true,
+    "Package": true,
+    "Subscription": true
 }

@@ -11,6 +11,7 @@ return [
     'description_en'       => 'الوصف (إنجليزي)',
     'description_ar'       => 'الوصف (عربي)',
     'price'                => 'السعر',
+    'discounted_price'     => 'السعر بعد الخصم',
     'order'                => 'الترتيب',
     'is_active'            => 'مفعّل',
     'status'               => 'الحالة',

@@ -48,6 +48,7 @@ class ProductController extends Controller
                 'title' => $product->getTranslation('title', app()->getLocale()),
                 'description' => $product->getTranslation('description', app()->getLocale()),
                 'price' => $product->price,
+                'discounted_price' => $product->discounted_price,
                 'is_active' => (bool) $product->is_active,
                 'images' => $product->images->map(fn ($image) => [
                     'id' => $image->id,

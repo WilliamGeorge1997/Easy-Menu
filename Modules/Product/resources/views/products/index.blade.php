@@ -42,6 +42,7 @@
                                 <th>{{ __('dashboard/products.branch') }}</th>
                             @endif
                             <th>{{ __('dashboard/products.price') }}</th>
+                            <th>{{ __('dashboard/products.discounted_price') }}</th>
                             <th>{{ __('dashboard/products.order') }}</th>
                             <th>{{ __('dashboard/products.images') }}</th>
                             <th>{{ __('dashboard/products.status') }}</th>
@@ -76,6 +77,9 @@
                                     <td>{{ $product->branch?->getTranslation('title', app()->getLocale()) ?? '-' }}</td>
                                 @endif
                                 <td>{{ number_format($product->price, 2) }}</td>
+                                <td>
+                                    {{ $product->discounted_price !== null ? number_format($product->discounted_price, 2) : '-' }}
+                                </td>
                                 <td>{{ $product->order }}</td>
                                 <td>
                                     <span class="badge bg-label-primary">{{ $product->images->count() }}</span>
@@ -122,7 +126,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center py-4">{{ __('dashboard/products.no_products') }}</td>
+                                <td colspan="10" class="text-center py-4">{{ __('dashboard/products.no_products') }}</td>
                             </tr>
                         @endforelse
                     </tbody>
