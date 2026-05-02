@@ -39,7 +39,7 @@ class ProductController extends Controller
             $product->load([
                 'images',
                 'addons' => fn ($query) => $query->where('is_active', 1)->with([
-                    'values' => fn ($valueQuery) => $valueQuery->where('is_active', 1),
+                    'values',
                 ]),
             ]);
 

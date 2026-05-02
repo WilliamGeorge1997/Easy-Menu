@@ -164,7 +164,6 @@
                     'title_en' => $value->getTranslation('title', 'en'),
                     'title_ar' => $value->getTranslation('title', 'ar'),
                     'price' => $value->price,
-                    'is_active' => (int) $value->is_active,
                     'image' => $value->image,
                 ];
             })->values()->all());
@@ -177,16 +176,12 @@
                 <div class="row g-2 border rounded p-3 mb-2">
                     <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" value="${value.title_en || ''}" placeholder="{{ __('dashboard/addons.value_title_en') }}" required></div>
                     <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" value="${value.title_ar || ''}" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required></div>
-                    <div class="col-md-2"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" value="${value.price || 0}" placeholder="{{ __('dashboard/addons.price') }}" required></div>
-                    <div class="col-md-2">
+                    <div class="col-md-3"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" value="${value.price || 0}" placeholder="{{ __('dashboard/addons.price') }}" required></div>
+                    <div class="col-md-4">
                         <input type="hidden" name="values[${i}][existing_image]" value="${safeExistingImage}">
                         <input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp">
                     </div>
-                    <div class="col-md-1 d-flex align-items-center">
-                        <input type="hidden" name="values[${i}][is_active]" value="0">
-                        <input type="checkbox" class="form-check-input" name="values[${i}][is_active]" value="1" ${Number(value.is_active) === 1 ? 'checked' : ''}>
-                    </div>
-                    <div class="col-md-1 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
+                    <div class="col-md-2 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
                     <div class="col-12">
                         <div class="d-flex align-items-center gap-2 mt-1 addon-value-image-preview">
                             <small class="text-muted">{{ __('dashboard/products.current_images') }}:</small>

@@ -15,7 +15,6 @@ class AddonValue extends Model
         'title',
         'price',
         'image',
-        'is_active',
     ];
 
     public array $translatable = ['title'];

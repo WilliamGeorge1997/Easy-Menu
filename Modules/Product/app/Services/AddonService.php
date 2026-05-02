@@ -31,9 +31,8 @@ class AddonService
     public function activeByBranch(int $branchId): Collection
     {
         return Addon::query()
-            ->active()
             ->where('branch_id', $branchId)
-            ->with(['values' => fn ($query) => $query->where('is_active', 1)])
+            ->with('values')
             ->latest()
             ->get();
     }
@@ -122,7 +121,6 @@ class AddonService
             $addon->values()->create([
                 'title' => $value['title'],
                 'price' => $value['price'],
-                'is_active' => $value['is_active'],
                 'image' => $image,
             ]);
         }

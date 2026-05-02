@@ -163,13 +163,9 @@
                 <div class="row g-2 border rounded p-3 mb-2">
                     <div class="col-md-3"><input class="form-control" name="values[${i}][title_en]" placeholder="{{ __('dashboard/addons.value_title_en') }}" required></div>
                     <div class="col-md-3"><input class="form-control" name="values[${i}][title_ar]" placeholder="{{ __('dashboard/addons.value_title_ar') }}" required></div>
-                    <div class="col-md-2"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" placeholder="{{ __('dashboard/addons.price') }}" required></div>
-                    <div class="col-md-2"><input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp"></div>
-                    <div class="col-md-1 d-flex align-items-center">
-                        <input type="hidden" name="values[${i}][is_active]" value="0">
-                        <input type="checkbox" class="form-check-input" name="values[${i}][is_active]" value="1" checked>
-                    </div>
-                    <div class="col-md-1 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
+                    <div class="col-md-3"><input type="number" step="0.01" min="0" class="form-control" name="values[${i}][price]" placeholder="{{ __('dashboard/addons.price') }}" required></div>
+                    <div class="col-md-4"><input type="file" class="form-control" name="values[${i}][image]" accept="image/jpg,image/jpeg,image/png,image/webp"></div>
+                    <div class="col-md-2 d-flex align-items-center"><button type="button" class="btn btn-sm btn-danger remove-row">X</button></div>
                 </div>`;
         }
 

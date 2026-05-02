@@ -43,7 +43,6 @@ class AddonDto
                         'ar' => $value['title_ar'],
                     ],
                     'price' => (float) ($value['price'] ?? 0),
-                    'is_active' => isset($value['is_active']) ? 1 : 0,
                     'image' => $this->request->file('values.'.$index.'.image'),
                     'existing_image' => $value['existing_image'] ?? null,
                 ];

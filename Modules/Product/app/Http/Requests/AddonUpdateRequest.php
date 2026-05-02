@@ -32,7 +32,6 @@ class AddonUpdateRequest extends FormRequest
             'values.*.title_en' => 'required|string|max:191',
             'values.*.title_ar' => 'required|string|max:191',
             'values.*.price' => 'required|numeric|min:0',
-            'values.*.is_active' => 'nullable|in:0,1',
             'values.*.image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
