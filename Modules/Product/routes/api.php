@@ -7,5 +7,7 @@ Route::prefix('v1')->group(function () {
 
     Route::get('products/categories-by-branch/{branchId}', [ProductController::class, 'index']);
     Route::get('products/addons-by-branch/{branchId}', [ProductController::class, 'addonsByBranch']);
+    Route::get('products/{product}/attributes', [ProductController::class, 'attributes']);
     Route::get('products/{product}', [ProductController::class, 'show']);
 });
+

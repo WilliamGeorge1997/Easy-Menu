@@ -105,6 +105,9 @@
                                             <i class="bx bx-dots-vertical-rounded"></i>
                                         </button>
                                         <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('admin.products.attributes.index', $product->id) }}">
+                                                <i class="bx bx-list-check me-1"></i> {{ __('dashboard/products.attributes') }}
+                                            </a>
                                             @can('update', $product)
                                                 <a class="dropdown-item" href="{{ route('admin.products.edit', $product->id) }}">
                                                     <i class="bx bx-edit-alt me-1"></i> {{ __('dashboard/products.edit_product') }}

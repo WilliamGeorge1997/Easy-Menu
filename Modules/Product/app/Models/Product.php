@@ -64,4 +64,11 @@ class Product extends Model
     {
         return $this->belongsToMany(Addon::class, 'addon_product');
     }
+
+    public function attributes(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Attribute::class)->orderBy('order');
+    }
 }
+
+

@@ -37,4 +37,6 @@ return [
     'first'                => 'أولاً',
     'image_delete_failed'  => 'فشل حذف الصورة. يرجى المحاولة مرة أخرى.',
     'branch_required_for_super_admin' => 'الفرع مطلوب للمشرف العام.',
+    'attributes'           => 'الخصائص',
 ];
+

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Product\Http\Controllers\AddonController;
+use Modules\Product\Http\Controllers\AttributeController;
 use Modules\Product\Http\Controllers\ProductController;
 
 Route::prefix('admin')->name('admin.')->middleware(['web', 'auth:admin', 'admin.locale'])->group(function () {
@@ -13,6 +14,13 @@ Route::prefix('admin')->name('admin.')->middleware(['web', 'auth:admin', 'admin.
 
     Route::resource('products', ProductController::class)->except(['show']);
 
+    Route::post('products/{product}/attributes/{attribute}/activate', [AttributeController::class, 'activate'])->name('products.attributes.activate');
+    Route::resource('products.attributes', AttributeController::class)
+        ->parameters(['attributes' => 'attribute'])
+        ->except(['show']);
+
+
     Route::post('addons/{addon}/activate', [AddonController::class, 'activate'])->name('addons.activate');
     Route::resource('addons', AddonController::class)->except(['show']);
 });
+

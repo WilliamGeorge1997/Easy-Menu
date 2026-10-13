@@ -37,4 +37,6 @@ return [
     'first'                => 'First',
     'image_delete_failed'  => 'Failed to delete image. Please try again.',
     'branch_required_for_super_admin' => 'Branch is required for Super Admin.',
+    'attributes'           => 'Attributes',
 ];
+

@@ -38,6 +38,9 @@ class ProductController extends Controller
         try {
             $product->load([
                 'images',
+                'attributes' => fn ($query) => $query->where('is_active', 1)->orderBy('order')->with([
+                    'values',
+                ]),
                 'addons' => fn ($query) => $query->where('is_active', 1)->with([
                     'values',
                 ]),
@@ -54,6 +57,24 @@ class ProductController extends Controller
                     'id' => $image->id,
                     'image' => $image->image,
                 ])->values(),
+                'attributes' => $product->attributes->map(function ($attribute) {
+                    return [
+                        'id' => $attribute->id,
+                        'name' => $attribute->getTranslation('title', app()->getLocale()),
+                        'title' => $attribute->getTranslation('title', app()->getLocale()),
+                        'type' => $attribute->type,
+                        'required' => (bool) $attribute->required,
+                        'multi_select' => (bool) $attribute->multi_select,
+                        'override_price' => (bool) $attribute->override_price,
+                        'order' => (int) $attribute->order,
+                        'values' => $attribute->values->map(fn ($value) => [
+                            'id' => $value->id,
+                            'name' => $value->getTranslation('value', app()->getLocale()),
+                            'value' => $value->getTranslation('value', app()->getLocale()),
+                            'price' => (float) $value->price,
+                        ])->values(),
+                    ];
+                })->values(),
                 'addons' => $product->addons->map(function ($addon) {
                     return [
                         'id' => $addon->id,
@@ -69,6 +90,38 @@ class ProductController extends Controller
             ];
 
             return returnMessage(true, 'Product details', $data);
+        } catch (\Exception $e) {
+            return returnMessage(false, $e->getMessage(), null, 'server_error');
+        }
+    }
+
+    public function attributes(Product $product)
+    {
+        try {
+            $product->load([
+                'attributes' => fn ($query) => $query->where('is_active', 1)->orderBy('order')->with('values'),
+            ]);
+
+            $data = $product->attributes->map(function ($attribute) {
+                return [
+                    'id' => $attribute->id,
+                    'name' => $attribute->getTranslation('title', app()->getLocale()),
+                    'title' => $attribute->getTranslation('title', app()->getLocale()),
+                    'type' => $attribute->type,
+                    'required' => (bool) $attribute->required,
+                    'multi_select' => (bool) $attribute->multi_select,
+                    'override_price' => (bool) $attribute->override_price,
+                    'order' => (int) $attribute->order,
+                    'values' => $attribute->values->map(fn ($value) => [
+                        'id' => $value->id,
+                        'name' => $value->getTranslation('value', app()->getLocale()),
+                        'value' => $value->getTranslation('value', app()->getLocale()),
+                        'price' => (float) $value->price,
+                    ])->values(),
+                ];
+            })->values();
+
+            return returnMessage(true, 'Product attributes', $data);
         } catch (\Exception $e) {
             return returnMessage(false, $e->getMessage(), null, 'server_error');
         }

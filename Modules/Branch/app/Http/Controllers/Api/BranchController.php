@@ -31,7 +31,7 @@ class BranchController extends Controller
             $branch = Branch::active()->where('slug', $slug)->firstOrFail();
 
             $categories = $branch->categories()
-                ->with('products.images')
+                ->with(['products.images', 'products.attributes.values'])
                 ->active()
                 ->orderBy('order')
                 ->get();
